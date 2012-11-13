@@ -1,11 +1,7 @@
 #!/usr/bin/env ruby -KU
 # encoding: UTF-8
 
-require 'rubygems'
-require 'bundler'
-
-Bundler.require(:default)
-
+require 'megahal'
 require 'benchmark'
 
 SENTENCES = [
