@@ -41,7 +41,10 @@ class MegaHAL
     puncs, words = _decompose(sentence)
     symbols = _normalise(words)
     @_markov.observe(symbols)
-    puncs.zip(symbols).flatten.compact.join
+  end
+
+  def generate
+    @_markov.generate.map { |symbol| @_dictionary[symbol] }.join
   end
 
   private

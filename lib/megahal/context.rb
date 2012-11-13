@@ -17,6 +17,10 @@ module MH
       @_symbols.map! { 0 }
     end
 
+    def size
+      @_symbols.size
+    end
+
     def <<(symbol)
       @_symbols << symbol
       @_symbols.shift

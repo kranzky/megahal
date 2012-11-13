@@ -22,3 +22,7 @@ megahal = MegaHAL.new
 SENTENCES.each do |sentence|
   puts megahal.observe(sentence)
 end
+
+100.times do
+  puts megahal.generate
+end
