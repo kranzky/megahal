@@ -5,7 +5,7 @@ module MH
   class Model
     def initialize(dictionary, size)
       @_dictionary = dictionary
-      @_context = MH::Context.new(size)
+      @_context = Context.new(size)
       @_model = Hash.new { |hash, key| hash[key] = Distribution.new }
     end
 

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ruby -I lib bin/megahal
