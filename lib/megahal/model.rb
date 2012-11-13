@@ -3,33 +3,45 @@
 module MH
 
   class Model
-    attr_accessor :context
-
-    def initialize
+    def initialize(dictionary, size)
+      @_dictionary = dictionary
+      @_context = MH::Context.new(size)
       @_model = Hash.new { |hash, key| hash[key] = Distribution.new }
     end
 
+    def observe(sequence)
+      @_context.reset!
+      sequence.each do |symbol|
+        @_context << (self << symbol)
+      end
+      puts @_model
+    end
+
+    def context
+      @_context
+    end
+
     def <<(symbol)
-      @_model[@context] << symbol
+      @_model[@_context.code] << (@_dictionary << symbol)
     end
 
     def inspect
       {
-        context: @context.to_a,
+        context: @_context.to_a,
         distribution: to_a
       }
     end
 
     def to_s
-      [@context.to_s, ': ', to_a.to_s].join
+      [@_context.inspect, ': ', to_a.to_s].join
     end
 
     def to_a
-      @_model[@context].to_a
+      @_model[@_context.code].to_a
     end
 
     def random
-      @_model[@context].random
+      @_model[@_context.code].random
     end
 
   end

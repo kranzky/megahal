@@ -2,10 +2,11 @@
 # encoding: UTF-8
 
 require 'megahal'
-require 'benchmark'
 
 SENTENCES = [
   'The cat sat on the mat.',
+  'The dog chased the cat!',
+  'The cat ran away...',
   '"Hello, Dr. Watson", said Holmes.',
   'See the ümlaut!',
   '?is this a test',
@@ -18,9 +19,6 @@ SENTENCES = [
 
 megahal = MegaHAL.new
 
-puts Benchmark.realtime {
-  SENTENCES.each do |sentence|
-    puts megahal.observe(sentence)
-  end
-  megahal.test
-}
+SENTENCES.each do |sentence|
+  puts megahal.observe(sentence)
+end

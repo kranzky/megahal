@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "bin/megahal",
     "lib/megahal.rb",
     "lib/megahal/context.rb",
+    "lib/megahal/dictionary.rb",
     "lib/megahal/distribution.rb",
     "lib/megahal/megahal.rb",
     "lib/megahal/model.rb",

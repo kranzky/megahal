@@ -1,12 +1,30 @@
 # encoding: UTF-8
 
 require 'megahal/context'
+require 'megahal/dictionary'
 require 'megahal/distribution'
 require 'megahal/model'
 
 class MegaHAL
+
+  def initialize
+    @_dictionary = MH::Dictionary.new
+    @_markov = MH::Model.new(@_dictionary, 2)
+  end
   
   def test
+
+    dictionary = MH::Dictionary.new
+
+    dictionary << 'the'
+    dictionary << 'cat'
+    dictionary << 'sat'
+    dictionary << 'on'
+    dictionary << 'the'
+    dictionary << 'mat'
+
+    puts dictionary[0]
+    puts dictionary['cat']
 
     model = MH::Model.new
     model.context = MH::Context.new
@@ -21,8 +39,8 @@ class MegaHAL
 
   def observe(sentence)
     puncs, words = _decompose(sentence)
-    raise unless puncs.length == words.length + 1
     symbols = _normalise(words)
+    @_markov.observe(symbols)
     puncs.zip(symbols).flatten.compact.join
   end
 

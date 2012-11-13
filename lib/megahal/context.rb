@@ -4,12 +4,22 @@ module MH
 
   class Context
 
-    def initialize
-      @_symbols = []
+    def initialize(size)
+      @_symbols = Array.new(size, 0)
+      @_format = 'w' * size
+    end
+
+    def code
+      @_symbols.pack(@_format)
+    end
+
+    def reset!
+      @_symbols.map! { 0 }
     end
 
     def <<(symbol)
-      @_symbols << symbol.to_sym
+      @_symbols << symbol
+      @_symbols.shift
     end
 
     def inspect

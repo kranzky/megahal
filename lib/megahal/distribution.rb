@@ -10,8 +10,9 @@ module MH
     end
 
     def <<(symbol)
-      @_count[symbol.to_sym] += 1
+      @_count[symbol] += 1
       @_total += 1
+      symbol
     end
 
     def inspect
