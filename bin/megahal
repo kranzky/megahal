@@ -22,4 +22,5 @@ puts Benchmark.realtime {
   SENTENCES.each do |sentence|
     puts megahal.observe(sentence)
   end
+  megahal.test
 }

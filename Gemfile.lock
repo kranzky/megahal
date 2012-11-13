@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    awesome_print (1.1.0)
     diff-lcs (1.1.3)
     git (1.2.5)
     jeweler (1.8.4)
@@ -21,14 +22,17 @@ GEM
     rspec-expectations (2.12.0)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.12.0)
+    unicode_utils (1.4.0)
     yard (0.8.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bundler
   jeweler
   redcarpet
   rspec
+  unicode_utils
   yard
