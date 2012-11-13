@@ -17,9 +17,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "megahal"
   gem.homepage = "http://github.com/jasonhutchens/megahal"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "jason@agworld.com.au"
+  gem.summary = %Q{MegaHAL is a learning chatterbot.}
+  gem.description = %Q{MegaHAL is a grammatical inference algorithm that can generate quasi natural language sentences in the context of a conversation.}
+  gem.email = "jasonhutchens@gmail.com"
   gem.authors = ["Jason Hutchens"]
   # dependencies defined in Gemfile
 end
@@ -29,11 +29,6 @@ require 'rspec/core'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
-end
-
-RSpec::Core::RakeTask.new(:rcov) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
 end
 
 task :default => :spec
