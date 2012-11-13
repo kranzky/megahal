@@ -16,15 +16,11 @@ class MegaHAL
     model << 'b'
     model << 'a'
     model << 'a'
-    ap model
-    ap model.random
 
   end
 
   def observe(sentence)
     puncs, words = _decompose(sentence)
-    ap puncs
-    ap words
     raise unless puncs.length == words.length + 1
     symbols = _normalise(words)
     puncs.zip(symbols).flatten.compact.join
