@@ -18,7 +18,6 @@ module MH
         end
         @_context << 0
         self << separators[-1]
-        @_context.size.times { @_context << (self << 0) }
       end
 
       def generate(symbols)
