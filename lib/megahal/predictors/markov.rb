@@ -2,7 +2,7 @@
 
 module MH
 
-  module Model
+  module Predictor
 
     class Markov < Base
       def initialize(dictionary, size)

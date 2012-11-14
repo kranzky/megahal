@@ -2,7 +2,7 @@
 
 module MH
 
-  module Model
+  module Predictor
 
     class Repair < Base
 

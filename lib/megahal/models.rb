@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 require 'megahal/models/base'
-require 'megahal/models/correlate'
-require 'megahal/models/insert'
-require 'megahal/models/markov'
-require 'megahal/models/repair'
+require 'megahal/models/capitalisation'
+require 'megahal/models/memory'
+require 'megahal/models/punctuation'
+require 'megahal/models/utterance'

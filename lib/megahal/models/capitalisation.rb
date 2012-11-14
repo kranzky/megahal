@@ -4,7 +4,7 @@ module MH
 
   module Model
 
-    class Base
+    class Capitalisation < Base
 
     end
 

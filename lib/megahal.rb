@@ -2,16 +2,17 @@
 
 require 'unicode_utils'
 
-require 'megahal/context'
 require 'megahal/dictionary'
+require 'megahal/context'
 require 'megahal/distribution'
+require 'megahal/predictors'
 require 'megahal/models'
 
 class MegaHAL
 
   def initialize
     @_dictionary = MH::Dictionary.new
-    @_markov = MH::Model::Markov.new(@_dictionary, 2)
+    @_markov = MH::Predictor::Markov.new(@_dictionary, 2)
   end
   
   def test
