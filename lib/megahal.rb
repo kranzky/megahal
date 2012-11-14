@@ -15,33 +15,19 @@ class MegaHAL
     @_memory = MH::Memory.new
     @_dictionary = MH::Dictionary.new
     @_utterance = MH::Model::Utterance.new
+    @_punctuation = MH::Model::Punctuation.new
   end
   
   def observe(sentence)
-    punctuation, words = _decompose(sentence)
-    symbols = _normalise(words)
-    [words, symbols, punctuation].each { |a| @_dictionary.map(a) }
-    @_utterance.learn(words)
+    separators, symbols, words = @_dictionary.decompose(sentence)
+    @_utterance.learn(symbols)
+    @_punctuation.learn(separators, symbols)
   end
 
   def generate
     symbols = @_utterance.generate(@_memory)
-    symbols.map { |symbol| @_dictionary[symbol] }.join
-  end
-
-  private
-
-  def _decompose(sentence, min = 5)
-    sequence = sentence.split(/([[:word:]]+)/)
-    chars = sequence.length <= min
-    sequence = sentence.split(/()/) if chars
-    sequence << '' if chars || sequence.last =~ /[[:word:]]+/
-    sequence.unshift '' if chars || sequence.first =~ /[[:word:]]+/
-    sequence.partition.with_index { |symbol, index| index.even? }
-  end
-
-  def _normalise(sequence)
-    sequence.map { |symbol| UnicodeUtils.upcase(symbol) }
+    separators = @_punctuation.generate(@_utterance)
+    @_dictionary.reconstitute(separators, symbols)
   end
 
 end

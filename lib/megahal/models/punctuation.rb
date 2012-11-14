@@ -6,6 +6,12 @@ module MH
 
     class Punctuation < Base
 
+      def learn(separators, symbols)
+      end
+
+      def generate(utterance)
+      end
+
     end
 
   end
