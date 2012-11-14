@@ -13,9 +13,10 @@ module MH
       def observe(separators, symbols)
         @_context.reset!
         symbols.each.with_index do |symbol, index|
-          self << separators[index]
           @_context << symbol
+          self << separators[index]
         end
+        @_context << 0
         self << separators[-1]
         @_context.size.times { @_context << (self << 0) }
       end
@@ -24,9 +25,10 @@ module MH
         separators = []
         @_context.reset!
         symbols.each do |symbol|
-          separators << random
           @_context << symbol
+          separators << random
         end
+        @_context << 0
         separators << random
         separators
       end
