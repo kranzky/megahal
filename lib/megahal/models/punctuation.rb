@@ -6,10 +6,16 @@ module MH
 
     class Punctuation < Base
 
-      def learn(separators, symbols)
+      def initialize
+        @_insert = MH::Predictor::Insert.new
       end
 
-      def generate(utterance)
+      def learn(separators, symbols)
+        @_insert.observe(separators, symbols)
+      end
+
+      def generate(symbols)
+        @_insert.generate(symbols)
       end
 
     end

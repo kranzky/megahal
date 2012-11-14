@@ -6,24 +6,24 @@ module MH
 
     class Markov < Base
 
-      def observe(sequence)
+      def observe(symbols)
         @_context.reset!
-        sequence.each do |symbol|
+        symbols.each do |symbol|
           @_context << (self << symbol)
         end
         @_context.size.times { @_context << (self << 0) }
       end
 
       def generate
-        retval = []
+        symbols = []
         @_context.reset!
         while true
-          index = random
-          break if index == 0
-          retval << index
-          @_context << index
+          symbol = random
+          break if symbol == 0
+          symbols << symbol
+          @_context << symbol
         end
-        retval
+        symbols
       end
 
     end

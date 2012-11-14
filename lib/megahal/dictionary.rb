@@ -12,11 +12,12 @@ module MH
     def decompose(sentence)
       seperators, words = _segment(sentence)
       symbols = _normalise(words)
-      [words, symbols, seperators].each { |a| map(a) }
+      [seperators, symbols, words].each { |a| map(a) }
     end
 
     def reconstitute(punctuation, words)
-      words.map { |symbol| self[symbol] }.join
+      sequence = punctuation.zip(words).flatten.compact
+      sequence.map { |symbol| self[symbol] }.join
     end
 
     protected
