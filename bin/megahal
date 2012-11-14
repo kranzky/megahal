@@ -20,10 +20,11 @@ SENTENCES = [
 megahal = MegaHAL.new
 
 SENTENCES.each do |sentence|
-  puts sentence
-  puts megahal.observe(sentence)
+  puts "Observe: #{sentence}"
+  megahal.observe(sentence)
 end
 
 100.times do
-  puts megahal.generate
+  utterance = megahal.generate
+  puts "Generate: #{utterance}"
 end
