@@ -3,6 +3,18 @@ MegaHAL
 
 MegaHAL is a learning chatterbot.
 
+TODO
+----
+
+* Move files around
+* Formalise markov model
+* Insertion model for punctuation
+* Markov model for punctuation validation (remove invalid sequences)
+* Long-distance model for punctuation scoring (minimise entropy)
+* 2x insertion models for capitalisation
+* Markov family for generation
+* Correlation model for keyword memory
+
 Contributing to megahal
 -----------------------
  

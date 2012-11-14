@@ -20,6 +20,7 @@ SENTENCES = [
 megahal = MegaHAL.new
 
 SENTENCES.each do |sentence|
+  puts sentence
   puts megahal.observe(sentence)
 end
 
