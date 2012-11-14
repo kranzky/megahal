@@ -6,8 +6,8 @@ module MH
 
     class Correlate < Base
 
-      def initialize(dictionary)
-        super(dictionary, 2)
+      def initialize
+        super(2)
       end
 
     end

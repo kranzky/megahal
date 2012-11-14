@@ -5,49 +5,28 @@ require 'unicode_utils'
 require 'megahal/dictionary'
 require 'megahal/context'
 require 'megahal/distribution'
+require 'megahal/memory'
 require 'megahal/predictors'
 require 'megahal/models'
 
 class MegaHAL
 
   def initialize
+    @_memory = MH::Memory.new
     @_dictionary = MH::Dictionary.new
-    @_markov = MH::Predictor::Markov.new(@_dictionary, 2)
+    @_utterance = MH::Model::Utterance.new
   end
   
-  def test
-
-    dictionary = MH::Dictionary.new
-
-    dictionary << 'the'
-    dictionary << 'cat'
-    dictionary << 'sat'
-    dictionary << 'on'
-    dictionary << 'the'
-    dictionary << 'mat'
-
-    puts dictionary[0]
-    puts dictionary['cat']
-
-    model = MH::Model.new
-    model.context = MH::Context.new
-    model.context << 'x'
-    model.context << 'y'
-    model << 'a'
-    model << 'b'
-    model << 'a'
-    model << 'a'
-
-  end
-
   def observe(sentence)
-    puncs, words = _decompose(sentence)
+    punctuation, words = _decompose(sentence)
     symbols = _normalise(words)
-    @_markov.observe(symbols)
+    [words, symbols, punctuation].each { |a| @_dictionary.map(a) }
+    @_utterance.learn(words)
   end
 
   def generate
-    @_markov.generate.map { |symbol| @_dictionary[symbol] }.join
+    symbols = @_utterance.generate(@_memory)
+    symbols.map { |symbol| @_dictionary[symbol] }.join
   end
 
   private

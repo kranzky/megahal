@@ -5,16 +5,13 @@ module MH
   module Predictor
 
     class Markov < Base
-      def initialize(dictionary, size)
-        super(dictionary, size)
-      end
 
       def observe(sequence)
         @_context.reset!
         sequence.each do |symbol|
           @_context << (self << symbol)
         end
-        @_context.size.times { @_context << (self << nil) }
+        @_context.size.times { @_context << (self << 0) }
       end
 
       def generate

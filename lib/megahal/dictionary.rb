@@ -9,6 +9,10 @@ module MH
       @_lookup = {nil => 0}
     end
 
+    def map(sequence)
+      sequence.map! { |symbol| self.<<(symbol) }
+    end
+
     def <<(symbol)
       return 0 if symbol.nil?
       key = symbol.to_sym

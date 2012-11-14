@@ -5,8 +5,8 @@ module MH
   module Predictor
 
     class Base
-      def initialize(dictionary, size)
-        @_dictionary = dictionary
+
+      def initialize(size)
         @_context = Context.new(size)
         @_model = Hash.new { |hash, key| hash[key] = Distribution.new }
       end
@@ -16,7 +16,7 @@ module MH
       end
 
       def <<(symbol)
-        @_model[@_context.code] << (@_dictionary << symbol)
+        @_model[@_context.code] << symbol
       end
 
       def inspect

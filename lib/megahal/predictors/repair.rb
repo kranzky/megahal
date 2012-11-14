@@ -6,8 +6,8 @@ module MH
 
     class Repair < Base
 
-      def initialize(dictionary)
-        super(dictionary, 2)
+      def initialize
+        super(2)
       end
 
       def observe(word_sequence, punc_sequence)
