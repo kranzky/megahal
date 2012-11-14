@@ -32,7 +32,7 @@ TODO
 * Capitalisation generator
   + Train on words / utterance / punctuation sequences
   + Repair predictor for capitalisation from punctuation
-  + Repair predictor for capitalisation from words
+  + Repair predictor fur capitalisation from words
   + Return most likely sequence
 
 Contributing to megahal

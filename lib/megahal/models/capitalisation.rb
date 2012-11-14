@@ -6,6 +6,13 @@ module MH
 
     class Capitalisation < Base
 
+      def learn(separators, symbols, words)
+      end
+
+      def generate(separators, symbols)
+        symbols
+      end
+
     end
 
   end
