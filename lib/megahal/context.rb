@@ -24,6 +24,7 @@ module MH
     def <<(symbol)
       @_symbols << symbol
       @_symbols.shift
+      self
     end
 
     def inspect
