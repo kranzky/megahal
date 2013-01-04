@@ -12,7 +12,7 @@ end
 original = File.open('original.txt', 'wb')
 repaired = File.open('repaired.txt', 'wb')
 
-File.read('corpora/sherlock.txt').each_line do |line|
+File.read('corpora/small.txt').each_line do |line|
   norms = megahal.normalise(line)
   sentence = megahal.reconstitute(norms)
   next if sentence == line.strip

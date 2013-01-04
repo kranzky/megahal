@@ -16,15 +16,24 @@ module MH
       id
     end
 
-    def +(other)
+    def |(other)
       raise unless other.kind_of?(Distribution)
       retval = Distribution.new
-      retval._total = @_total + other._total
-      @_count.each do |id, count|
-        retval._count[id] += count
+      (@_count.keys | other._count.keys).each do |id|
+        retval._count[id] += @_count[id]
+        retval._count[id] += other._count[id]
+        retval._total += retval._count[id]
       end
-      other._count.each do |id, count|
-        retval._count[id] += count
+      retval
+    end
+
+    def &(other)
+      raise unless other.kind_of?(Distribution)
+      retval = Distribution.new
+      (@_count.keys & other._count.keys).each do |id|
+        retval._count[id] += @_count[id]
+        retval._count[id] += other._count[id]
+        retval._total += retval._count[id]
       end
       retval
     end

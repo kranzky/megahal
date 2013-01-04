@@ -45,6 +45,18 @@ describe MH::Dictionary do
       @dictionary[words.last].to_s.should == '？'
     end
 
+    it 'should strip whitespace' do
+      puncs, norms, words = @dictionary.decompose('  "this is a test"  ')
+      puncs.length.should == 5
+      @dictionary[puncs.first].to_s.should == '"'
+      @dictionary[puncs.last].to_s.should == '"'
+    end
+
+    it 'should convert short sentences to chars' do
+      puncs, norms, words = @dictionary.decompose('test')
+      norms.length.should == 4
+    end
+
   end
 
   describe '#reconstitute' do

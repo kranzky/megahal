@@ -54,7 +54,7 @@ module MH
     def _segment(sentence, min = 5)
       sequence = sentence.strip.split(/([[:word:]]+)/)
       chars = sequence.length <= min
-      sequence = sentence.split(/()/) if chars
+      sequence = sentence.strip.split(/()/) if chars
       sequence << '' if chars || sequence.last =~ /[[:word:]]+/
       sequence.unshift '' if chars || sequence.first =~ /[[:word:]]+/
       sequence.partition.with_index { |symbol, index| index.even? }

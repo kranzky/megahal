@@ -29,19 +29,34 @@ describe MH::Distribution do
 
   end
 
-  describe '#+' do
+  describe '#|' do
 
-    it 'should add two distributions together' do
+    it 'should or two distributions together' do
       other = MH::Distribution.new
       @distribution << 1
       @distribution << 2
       other << 2
       other << 3
-      retval = @distribution + other
+      retval = @distribution | other
       retval.to_a.length.should == 3
       retval.to_a[0].should == { id: 1, probability: 0.25 }
       retval.to_a[1].should == { id: 2, probability: 0.5 }
       retval.to_a[2].should == { id: 3, probability: 0.25 }
+    end
+
+  end
+
+  describe '#&' do
+
+    it 'should and two distributions together' do
+      other = MH::Distribution.new
+      @distribution << 1
+      @distribution << 2
+      other << 2
+      other << 3
+      retval = @distribution & other
+      retval.to_a.length.should == 1
+      retval.to_a[0].should == { id: 2, probability: 1.0 }
     end
 
   end
