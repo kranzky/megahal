@@ -5,25 +5,26 @@ module MH
   class Context
 
     def initialize(size)
-      @_symbols = Array.new(size, 0)
+      @_ids = Array.new(size, 0)
       @_format = 'w' * size
     end
 
     def code
-      @_symbols.pack(@_format)
+      @_ids.pack(@_format)
     end
 
     def reset!
-      @_symbols.map! { 0 }
+      @_ids.map! { 0 }
     end
 
     def size
-      @_symbols.size
+      @_ids.size
     end
 
-    def <<(symbol)
-      @_symbols << symbol
-      @_symbols.shift
+    def <<(id)
+      raise unless id.kind_of?(Integer)
+      @_ids << id
+      @_ids.shift
       self
     end
 
@@ -36,7 +37,7 @@ module MH
     end
 
     def to_a
-      @_symbols
+      @_ids
     end
 
   end

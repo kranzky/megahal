@@ -9,10 +9,11 @@ module MH
       @_total = 0
     end
 
-    def <<(symbol)
-      @_count[symbol] += 1
+    def <<(id)
+      raise unless id.kind_of?(Integer)
+      @_count[id] += 1
       @_total += 1
-      symbol
+      id
     end
 
     def inspect
@@ -25,17 +26,18 @@ module MH
 
     def to_a
       total = @_total.to_f
-      @_count.map do |symbol, count|
+      @_count.map do |id, count|
         {
-          symbol: symbol,
+          id: id,
           probability: count / total
         }
       end
     end
 
     def random
+      return nil if @_total == 0
       threshold = rand(0...@_total)
-      element = @_count.detect do |symbol, count|
+      element = @_count.detect do |_, count|
         (threshold -= count) < 0
       end
       element.first

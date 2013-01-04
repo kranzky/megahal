@@ -10,7 +10,8 @@ module MH
         super(2)
       end
 
-      def observe(word_sequence, punc_sequence)
+      def observe(puncs, words)
+        raise unless words.length == puncs.length - 1
         @_context.reset!
         sequence.each do |symbol|
           @_context << (self << symbol)

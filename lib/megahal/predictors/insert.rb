@@ -10,26 +10,27 @@ module MH
         super(2)
       end
 
-      def observe(separators, symbols)
+      def observe(puncs, norms)
+        raise unless norms.length == puncs.length - 1
         @_context.reset!
-        symbols.each.with_index do |symbol, index|
+        norms.each.with_index do |symbol, index|
           @_context << symbol
-          self << separators[index]
+          self << puncs[index]
         end
         @_context << 0
-        self << separators[-1]
+        self << puncs[-1]
       end
 
-      def generate(symbols)
-        separators = []
+      def generate(norms)
+        puncs = []
         @_context.reset!
-        symbols.each do |symbol|
+        norms.each do |symbol|
           @_context << symbol
-          separators << random
+          puncs << random
         end
         @_context << 0
-        separators << random
-        separators
+        puncs << random
+        puncs
       end
 
     end

@@ -10,24 +10,20 @@ module MH
     end
 
     def decompose(sentence)
-      seperators, words = _segment(sentence)
-      symbols = _normalise(words)
-      [seperators, symbols, words].each { |a| map(a) }
+      puncs, words = _segment(sentence)
+      norms = _normalise(words)
+      [puncs, norms, words].each { |a| self << a }
     end
 
-    def reconstitute(punctuation, words)
-      sequence = punctuation.zip(words).flatten.compact
+    def reconstitute(puncs, words)
+      sequence = puncs.zip(words).flatten.compact
       sequence.map { |symbol| self[symbol] }.join
-    end
-
-    protected
-
-    def map(sequence)
-      sequence.map! { |symbol| self.<<(symbol) }
     end
 
     def <<(symbol)
       return 0 if symbol.nil?
+      symbol = symbol.to_sym if symbol.kind_of?(String)
+      return _insert(symbol) unless symbol.kind_of?(Symbol)
       key = symbol.to_sym
       unless @_lookup.include?(key)
         @_lookup[key] = @_index.length
@@ -66,6 +62,10 @@ module MH
 
     def _normalise(sequence)
       sequence.map { |symbol| UnicodeUtils.upcase(symbol) }
+    end
+
+    def _insert(sequence)
+      sequence.map! { |symbol| self.<<(symbol) }
     end
 
   end
