@@ -3,26 +3,7 @@
 
 require 'megahal'
 
-SENTENCES = [
-  'The cat sat on the mat.',
-  'The dog chased the cat!',
-  'The cat ran away...',
-  '"Hello, Dr. Watson", said Holmes.',
-  'See the ümlaut!',
-  '?is this a test',
-  '有什么需要我帮你的？',
-  'funbags',
-  "(don't)",
-  "[higgledy-piggeldy]",
-  '???'
-]
-
 megahal = MegaHAL.new
-
-#SENTENCES.each do |sentence|
-#  puts "Observe: #{sentence}"
-#  megahal.observe(sentence)
-#end
 
 File.read('corpora/sherlock.txt').each_line do |line|
   megahal.observe(line.strip)

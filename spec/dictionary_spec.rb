@@ -29,6 +29,22 @@ describe MH::Dictionary do
       @dictionary[words.last].should == :mat
     end
 
+    it 'should handle punctuation' do
+      puncs, norms, words = @dictionary.decompose('?!?is this a test')
+      @dictionary[puncs.first].to_s.should == '?!?'
+    end
+
+    it 'should handle utf characters' do
+      puncs, norms, words = @dictionary.decompose('See the ümlaut!')
+      @dictionary[words[2]].to_s.should == 'ümlaut'
+    end
+
+    it 'should handle chinese' do
+      puncs, norms, words = @dictionary.decompose('有什么需要我帮你的？')
+      words.length.should == 10
+      @dictionary[words.last].to_s.should == '？'
+    end
+
   end
 
   describe '#reconstitute' do
