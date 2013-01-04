@@ -6,7 +6,7 @@ require 'megahal'
 megahal = MegaHAL.new
 
 File.read('corpora/sherlock.txt').each_line do |line|
-  megahal.observe(line.strip)
+  megahal.observe(line)
 end
 
 100.times do

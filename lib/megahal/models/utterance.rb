@@ -10,8 +10,8 @@ module MH
         @_markov = MH::Predictor::Markov.new(2)
       end
 
-      def learn(symbols)
-        @_markov.observe(symbols)
+      def learn(norms)
+        @_markov.observe(norms)
       end
 
       def generate(memory)

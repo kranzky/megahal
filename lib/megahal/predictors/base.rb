@@ -38,6 +38,10 @@ module MH
         @_model[@_context.code].random
       end
 
+      def predict
+        @_model[@_context.code]
+      end
+
     end
 
   end

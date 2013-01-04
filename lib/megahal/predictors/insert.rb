@@ -13,8 +13,8 @@ module MH
       def observe(puncs, norms)
         raise unless norms.length == puncs.length - 1
         @_context.reset!
-        norms.each.with_index do |symbol, index|
-          @_context << symbol
+        norms.each.with_index do |id, index|
+          @_context << id
           self << puncs[index]
         end
         @_context << 0
@@ -24,12 +24,12 @@ module MH
       def generate(norms)
         puncs = []
         @_context.reset!
-        norms.each do |symbol|
-          @_context << symbol
-          puncs << random
+        norms.each do |id|
+          @_context << id
+          puncs << self.random
         end
         @_context << 0
-        puncs << random
+        puncs << self.random
         puncs
       end
 

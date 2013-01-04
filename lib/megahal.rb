@@ -22,28 +22,37 @@ class MegaHAL
   end
 
   def observe(sentence)
-    separators, symbols, words = @_dictionary.decompose(sentence)
-    @_utterance.learn(symbols)
-    @_punctuation.learn(separators, symbols)
-    @_capitalisation.learn(separators, symbols, words)
-    symbols
+    puncs, norms, words = @_dictionary.decompose(sentence)
+    @_utterance.learn(norms)
+    @_punctuation.learn(puncs, norms)
+    @_capitalisation.learn(puncs, norms, words)
+    norms
   end
-  
+
+  def normalise(sentence)
+    _, norms, _ = @_dictionary.decompose(sentence)
+    norms
+  end
+
+  def reconstitute(norms)
+    puncs = @_punctuation.generate(norms)
+    words = @_capitalisation.generate(puncs, norms)
+    @_dictionary.reconstitute(puncs, words)
+  end
+
   def stimulus(sentence)
     @_session.question = observe(sentence)
   end
 
   def response(sentence)
-    answer = observe(sentence)
+    @_session.answer = observe(sentence)
     @_memory.learn(@_session.question, @_session.answer)
   end
 
   def generate
     @_memory.think(@_session.question, @_session.memory)
-    symbols = @_utterance.generate(@_session.memory)
-    separators = @_punctuation.generate(symbols)
-    words = @_capitalisation.generate(separators, symbols)
-    @_dictionary.reconstitute(separators, words)
+    norms = @_utterance.generate(@_session.memory)
+    reconstitute(norms)
   end
 
 end

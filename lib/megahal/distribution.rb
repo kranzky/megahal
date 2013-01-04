@@ -16,6 +16,19 @@ module MH
       id
     end
 
+    def +(other)
+      raise unless other.kind_of?(Distribution)
+      retval = Distribution.new
+      retval._total = @_total + other._total
+      @_count.each do |id, count|
+        retval._count[id] += count
+      end
+      other._count.each do |id, count|
+        retval._count[id] += count
+      end
+      retval
+    end
+
     def inspect
       to_s
     end
@@ -42,6 +55,23 @@ module MH
       end
       element.first
     end
+
+    def max
+      return nil if @_total == 0
+      max_count = 0
+      max_counts = []
+      @_count.each do |id, count|
+        next if count < max_count
+        max_counts.clear if count > max_count
+        max_count = count
+        max_counts << id
+      end
+      max_counts.sample
+    end
+
+    protected
+
+    attr_accessor :_total, :_count
 
   end
 

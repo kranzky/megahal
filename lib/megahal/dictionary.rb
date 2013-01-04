@@ -52,7 +52,7 @@ module MH
     private
 
     def _segment(sentence, min = 5)
-      sequence = sentence.split(/([[:word:]]+)/)
+      sequence = sentence.strip.split(/([[:word:]]+)/)
       chars = sequence.length <= min
       sequence = sentence.split(/()/) if chars
       sequence << '' if chars || sequence.last =~ /[[:word:]]+/

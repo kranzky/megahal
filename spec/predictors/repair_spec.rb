@@ -17,12 +17,4 @@ describe MH::Predictor::Repair do
 
   end
 
-  describe '#observe' do
-
-    it 'should infer a model to repair a sentence' do
-      @repair.observe([1, 2, 3, 4], [5, 6, 7])
-    end
-
-  end
-
 end
