@@ -1,11 +1,11 @@
-module MH
+module MegaHAL
 
   module Model
 
     class Utterance < Base
 
       def initialize
-        @_markov = MH::Predictor::Markov.new(2)
+        @_markov = Predictor::Markov.new(2)
       end
 
       def learn(norms)

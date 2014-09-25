@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Model::Base do
+describe MegaHAL::Model::Base do
 
   before do
-    @base = MH::Model::Base.new
+    @base = MegaHAL::Model::Base.new
   end
 
   describe '#initialize' do

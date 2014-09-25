@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Predictor::Markov do
+describe MegaHAL::Predictor::Markov do
 
   before do
-    @markov = MH::Predictor::Markov.new
+    @markov = MegaHAL::Predictor::Markov.new
   end
 
   describe '#initialize' do

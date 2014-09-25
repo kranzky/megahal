@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Model::Punctuation do
+describe MegaHAL::Model::Punctuation do
 
   before do
-    @punctuation = MH::Model::Punctuation.new
+    @punctuation = MegaHAL::Model::Punctuation.new
   end
 
   describe '#initialize' do

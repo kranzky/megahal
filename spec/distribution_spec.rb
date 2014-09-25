@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Distribution do
+describe MegaHAL::Distribution do
 
   before do
-    @distribution = MH::Distribution.new
+    @distribution = MegaHAL::Distribution.new
   end
 
   describe '#initialize' do
@@ -30,7 +30,7 @@ describe MH::Distribution do
   describe '#|' do
 
     it 'should or two distributions together' do
-      other = MH::Distribution.new
+      other = MegaHAL::Distribution.new
       @distribution << 1
       @distribution << 2
       other << 2
@@ -47,7 +47,7 @@ describe MH::Distribution do
   describe '#&' do
 
     it 'should and two distributions together' do
-      other = MH::Distribution.new
+      other = MegaHAL::Distribution.new
       @distribution << 1
       @distribution << 2
       other << 2

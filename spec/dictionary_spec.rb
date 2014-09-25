@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Dictionary do
+describe MegaHAL::Dictionary do
 
   before do
-    @dictionary = MH::Dictionary.new
+    @dictionary = MegaHAL::Dictionary.new
   end
 
   describe '#initialize' do

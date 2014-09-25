@@ -1,4 +1,4 @@
-module MH
+module MegaHAL
 
   module Model
 

@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Predictor::Insert do
+describe MegaHAL::Predictor::Insert do
 
   before do
-    @insert = MH::Predictor::Insert.new
+    @insert = MegaHAL::Predictor::Insert.new
   end
 
   describe '#initialize' do

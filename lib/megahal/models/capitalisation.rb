@@ -1,4 +1,4 @@
-module MH
+module MegaHAL
 
   module Model
 
@@ -11,7 +11,7 @@ module MH
     class Capitalisation < Base
 
       def initialize
-        @_models = 4.times.map { MH::Predictor::Repair.new }
+        @_models = 4.times.map { Predictor::Repair.new }
       end
 
       def learn(puncs, norms, words)

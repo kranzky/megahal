@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Session do
+describe MegaHAL::Session do
 
   before do
-    @session = MH::Session.new
+    @session = MegaHAL::Session.new
   end
 
   describe '#initialize' do

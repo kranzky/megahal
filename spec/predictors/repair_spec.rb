@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Predictor::Repair do
+describe MegaHAL::Predictor::Repair do
 
   before do
-    @repair = MH::Predictor::Repair.new
+    @repair = MegaHAL::Predictor::Repair.new
   end
 
   describe '#initialize' do

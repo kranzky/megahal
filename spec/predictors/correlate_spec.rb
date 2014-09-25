@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Predictor::Correlate do
+describe MegaHAL::Predictor::Correlate do
 
   before do
-    @correlate = MH::Predictor::Correlate.new
+    @correlate = MegaHAL::Predictor::Correlate.new
   end
 
   describe '#initialize' do

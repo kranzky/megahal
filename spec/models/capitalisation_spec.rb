@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Model::Capitalisation do
+describe MegaHAL::Model::Capitalisation do
 
   before do
-    @capitalisation = MH::Model::Capitalisation.new
+    @capitalisation = MegaHAL::Model::Capitalisation.new
   end
 
   describe '#initialize' do

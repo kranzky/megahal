@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Predictor::Base do
+describe MegaHAL::Predictor::Base do
 
   before do
-    @base = MH::Predictor::Base.new(3)
+    @base = MegaHAL::Predictor::Base.new(3)
   end
 
   describe '#initialize' do

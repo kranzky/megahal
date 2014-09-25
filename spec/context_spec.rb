@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Context do
+describe MegaHAL::Context do
 
   before do
-    @context = MH::Context.new(3)
+    @context = MegaHAL::Context.new(3)
   end
 
   describe '#initialize' do

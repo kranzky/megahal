@@ -1,4 +1,4 @@
-module MH
+module MegaHAL
 
   module Model
 
@@ -15,7 +15,7 @@ module MH
     class Punctuation < Base
 
       def initialize
-        @_insert = MH::Predictor::Insert.new
+        @_insert = Predictor::Insert.new
       end
 
       def learn(puncs, norms)

@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe MH::Model::Memory do
+describe MegaHAL::Model::Memory do
 
   before do
-    @memory = MH::Model::Memory.new
+    @memory = MegaHAL::Model::Memory.new
   end
 
   describe '#initialize' do
