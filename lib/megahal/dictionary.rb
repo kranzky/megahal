@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module MH
 
   class Dictionary
@@ -61,7 +59,7 @@ module MH
     end
 
     def _normalise(sequence)
-      sequence.map { |symbol| UnicodeUtils.upcase(symbol) }
+      sequence.map { |symbol| symbol.upcase }
     end
 
     def _insert(sequence)

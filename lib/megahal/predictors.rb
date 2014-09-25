@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'megahal/predictors/base'
 require 'megahal/predictors/correlate'
 require 'megahal/predictors/insert'

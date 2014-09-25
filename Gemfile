@@ -1,12 +1,11 @@
-source 'http://rubygems.org'
-
-gem 'unicode_utils'
+source 'https://rubygems.org'
+ruby '2.1.3'
 
 group :development do
-  gem 'rspec'
-  gem 'yard'
-  gem 'bundler'
-  gem 'redcarpet'
-  gem 'jeweler'
-  gem 'awesome_print'
+  gem 'rspec', '~> 3.1'
+  gem 'yard', '~> 0.8'
+  gem 'redcarpet', '~> 3.1'
+  gem 'jeweler', '~> 2.0'
+  gem 'awesome_print', '~> 1.2'
+  gem 'byebug', '~> 3.4'
 end

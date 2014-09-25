@@ -8,7 +8,7 @@ Design
 
 First, we segment the sentence into three arrays of IDs (puncs, words and
 norms). This is done partly for efficiency and partly to force us to abandon all
-hope of meaning. We're just dealing with numbers. The inverse operation is
+"symbols of meaning". We're just dealing with numbers. The inverse operation is
 repairing the array of generated norms to yield a pleasing, correctly punctuated
 sentence in a human language.
 
@@ -54,4 +54,4 @@ Contributing to megahal
 Copyright
 ---------
 
-Copyright (c) 2012 Jason Hutchens. See LICENSE.txt for further details.
+Copyright (c) 2014 Jason Hutchens. See LICENSE.txt for further details.
