@@ -2,7 +2,7 @@
 
 require 'megahal'
 
-megahal = MegaHAL.new
+megahal = MegaHAL::Brain.new
 
 File.read('corpora/sherlock.txt').each_line do |line|
   megahal.observe(line)

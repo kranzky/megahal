@@ -9,8 +9,8 @@ describe MegaHAL::Predictor::Repair do
   describe '#initialize' do
 
     it 'should start out empty' do
-      @repair.context.to_a.should == [0, 0]
-      @repair.random.should == nil
+      expect(@repair.context.to_a).to eq([0, 0])
+      expect(@repair.random).to eq(nil)
     end
 
   end

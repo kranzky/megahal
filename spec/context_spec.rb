@@ -9,8 +9,8 @@ describe MegaHAL::Context do
   describe '#initialize' do
 
     it 'should start off empty' do
-      @context.size.should == 3
-      @context.to_a.should == [0, 0, 0]
+      expect(@context.size).to eq(3)
+      expect(@context.to_a).to eq([0, 0, 0])
     end
 
   end
@@ -19,16 +19,16 @@ describe MegaHAL::Context do
 
     it 'should append and wrap' do
       @context << 1
-      @context.to_a.should == [0, 0, 1]
+      expect(@context.to_a).to eq([0, 0, 1])
       @context << 2
-      @context.to_a.should == [0, 1, 2]
+      expect(@context.to_a).to eq([0, 1, 2])
       @context << 3
-      @context.to_a.should == [1, 2, 3]
+      expect(@context.to_a).to eq([1, 2, 3])
     end
 
     it 'should chain' do
       @context << 1 << 2 << 3 << 4 << 5
-      @context.to_a.should == [3, 4, 5]
+      expect(@context.to_a).to eq([3, 4, 5])
     end
 
   end
@@ -37,9 +37,9 @@ describe MegaHAL::Context do
 
     it 'should reset to empty state' do
       @context << 1 << 2 << 3
-      @context.to_a.should == [1, 2, 3]
+      expect(@context.to_a).to eq([1, 2, 3])
       @context.reset!
-      @context.to_a.should == [0, 0, 0]
+      expect(@context.to_a).to eq([0, 0, 0])
     end
 
   end
@@ -47,9 +47,9 @@ describe MegaHAL::Context do
   describe '#code' do
 
     it 'should represent itself in a compact form' do
-      @context.code.bytesize.should == 3
+      expect(@context.code.bytesize).to eq(3)
       @context << 2e10.to_i << 2e11.to_i << 2e12.to_i
-      @context.code.bytesize.should == 17
+      expect(@context.code.bytesize).to eq(17)
     end
 
   end

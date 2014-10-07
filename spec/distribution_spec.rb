@@ -9,8 +9,8 @@ describe MegaHAL::Distribution do
   describe '#initialize' do
 
     it 'should start out blank' do
-      @distribution.to_a.should == []
-      @distribution.random.should == nil
+      expect(@distribution.to_a).to eq([])
+      expect(@distribution.random).to eq(nil)
     end
 
   end
@@ -19,10 +19,10 @@ describe MegaHAL::Distribution do
 
     it 'should increase the count of an appended id' do
       @distribution << 1
-      @distribution.to_a.first.should == {id: 1, probability: 1}
+      expect(@distribution.to_a.first).to eq({id: 1, probability: 1})
       @distribution << 2
-      @distribution.to_a.length.should == 2
-      @distribution.to_a.first.should == {id: 1, probability: 0.5}
+      expect(@distribution.to_a.length).to eq(2)
+      expect(@distribution.to_a.first).to eq({id: 1, probability: 0.5})
     end
 
   end
@@ -36,10 +36,10 @@ describe MegaHAL::Distribution do
       other << 2
       other << 3
       retval = @distribution | other
-      retval.to_a.length.should == 3
-      retval.to_a[0].should == { id: 1, probability: 0.25 }
-      retval.to_a[1].should == { id: 2, probability: 0.5 }
-      retval.to_a[2].should == { id: 3, probability: 0.25 }
+      expect(retval.to_a.length).to eq(3)
+      expect(retval.to_a[0]).to eq({ id: 1, probability: 0.25 })
+      expect(retval.to_a[1]).to eq({ id: 2, probability: 0.5 })
+      expect(retval.to_a[2]).to eq({ id: 3, probability: 0.25 })
     end
 
   end
@@ -53,8 +53,8 @@ describe MegaHAL::Distribution do
       other << 2
       other << 3
       retval = @distribution & other
-      retval.to_a.length.should == 1
-      retval.to_a[0].should == { id: 2, probability: 1.0 }
+      expect(retval.to_a.length).to eq(1)
+      expect(retval.to_a[0]).to eq({ id: 2, probability: 1.0 })
     end
 
   end
@@ -69,9 +69,9 @@ describe MegaHAL::Distribution do
       1000.times do
         counts[@distribution.random] += 1
       end
-      counts.keys.sort.should == [1, 2]
-      counts[1].should be_within(50).of(666)
-      counts[2].should be_within(50).of(333)
+      expect(counts.keys.sort).to eq([1, 2])
+      expect(counts[1]).to be_within(50).of(666)
+      expect(counts[2]).to be_within(50).of(333)
     end
 
   end
@@ -82,10 +82,10 @@ describe MegaHAL::Distribution do
       @distribution << 1
       @distribution << 1
       @distribution << 2
-      @distribution.max.should == 1
+      expect(@distribution.max).to eq(1)
       @distribution << 2
       @distribution << 2
-      @distribution.max.should == 2
+      expect(@distribution.max).to eq(2)
     end
 
     it 'should select randomly if two or more ids have the same max count' do
@@ -95,9 +95,9 @@ describe MegaHAL::Distribution do
       1000.times do
         counts[@distribution.max] += 1
       end
-      counts.keys.sort.should == [1, 2]
-      counts[1].should be_within(50).of(500)
-      counts[2].should be_within(50).of(500)
+      expect(counts.keys.sort).to eq([1, 2])
+      expect(counts[1]).to be_within(50).of(500)
+      expect(counts[2]).to be_within(50).of(500)
     end
 
   end

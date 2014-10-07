@@ -9,8 +9,8 @@ describe MegaHAL::Predictor::Correlate do
   describe '#initialize' do
 
     it 'should start out empty' do
-      @correlate.context.to_a.should == [0, 0]
-      @correlate.random.should == nil
+      expect(@correlate.context.to_a).to eq([0, 0])
+      expect(@correlate.random).to eq(nil)
     end
 
   end

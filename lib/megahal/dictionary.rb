@@ -4,7 +4,7 @@ module MegaHAL
 
     def initialize
       @_index = [nil]
-      @_lookup = {nil => 0}
+      @_lookup = { nil => 0 }
     end
 
     def decompose(sentence)

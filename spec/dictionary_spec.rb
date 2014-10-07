@@ -9,9 +9,9 @@ describe MegaHAL::Dictionary do
   describe '#initialize' do
 
     it 'should be created with the non-symbol' do
-      @dictionary.to_a.should == [nil]
-      @dictionary[nil].should == 0
-      @dictionary[0].should == nil
+      expect(@dictionary.to_a).to eq([nil])
+      expect(@dictionary[nil]).to eq(0)
+      expect(@dictionary[0]).to eq(nil)
     end
 
   end
@@ -20,39 +20,39 @@ describe MegaHAL::Dictionary do
 
     it 'should convert a sentence to three arrays of ids' do
       puncs, norms, words = @dictionary.decompose('The cat sat on the mat!')
-      puncs.length.should == 7
-      norms.length.should == puncs.length - 1
-      words.length.should == norms.length
-      @dictionary[norms.first].should == :THE
-      @dictionary[words.last].should == :mat
+      expect(puncs.length).to eq(7)
+      expect(norms.length).to eq(puncs.length - 1)
+      expect(words.length).to eq(norms.length)
+      expect(@dictionary[norms.first]).to eq(:THE)
+      expect(@dictionary[words.last]).to eq(:mat)
     end
 
     it 'should handle punctuation' do
       puncs, norms, words = @dictionary.decompose('?!?is this a test')
-      @dictionary[puncs.first].to_s.should == '?!?'
+      expect(@dictionary[puncs.first].to_s).to eq('?!?')
     end
 
     it 'should handle utf characters' do
       puncs, norms, words = @dictionary.decompose('See the ümlaut!')
-      @dictionary[words[2]].to_s.should == 'ümlaut'
+      expect(@dictionary[words[2]].to_s).to eq('ümlaut')
     end
 
     it 'should handle chinese' do
       puncs, norms, words = @dictionary.decompose('有什么需要我帮你的？')
-      words.length.should == 10
-      @dictionary[words.last].to_s.should == '？'
+      expect(words.length).to eq(10)
+      expect(@dictionary[words.last].to_s).to eq('？')
     end
 
     it 'should strip whitespace' do
       puncs, norms, words = @dictionary.decompose('  "this is a test"  ')
-      puncs.length.should == 5
-      @dictionary[puncs.first].to_s.should == '"'
-      @dictionary[puncs.last].to_s.should == '"'
+      expect(puncs.length).to eq(5)
+      expect(@dictionary[puncs.first].to_s).to eq('"')
+      expect(@dictionary[puncs.last].to_s).to eq('"')
     end
 
     it 'should convert short sentences to chars' do
       puncs, norms, words = @dictionary.decompose('test')
-      norms.length.should == 4
+      expect(norms.length).to eq(4)
     end
 
   end
@@ -61,7 +61,7 @@ describe MegaHAL::Dictionary do
 
     it 'should return a sentence from two arrays of ids' do
       puncs, norms, words = @dictionary.decompose('The cat sat on the mat!')
-      @dictionary.reconstitute(puncs, words).should == 'The cat sat on the mat!'
+      expect(@dictionary.reconstitute(puncs, words)).to eq('The cat sat on the mat!')
     end
 
   end
@@ -71,8 +71,8 @@ describe MegaHAL::Dictionary do
     it 'should append a sequence' do
       sequence = [:one, :two, :three]
       @dictionary << sequence
-      @dictionary[:two].should == 2
-      @dictionary[2].should == :two
+      expect(@dictionary[:two]).to eq(2)
+      expect(@dictionary[2]).to eq(:two)
     end
 
   end
@@ -80,10 +80,10 @@ describe MegaHAL::Dictionary do
   describe '#<<' do
 
     it 'should return a new id when appending a new symbol' do
-      @dictionary[:one].should == nil
+      expect(@dictionary[:one]).to eq(nil)
       id = @dictionary << :one
-      id.should == 1
-      @dictionary[:one].should == 1
+      expect(id).to eq(1)
+      expect(@dictionary[:one]).to eq(1)
     end
 
   end
@@ -91,9 +91,9 @@ describe MegaHAL::Dictionary do
   describe '#[]' do
 
     it 'should return the symbol by its id' do
-      @dictionary[1].should == nil
+      expect(@dictionary[1]).to eq(nil)
       @dictionary << :one
-      @dictionary[1].should == :one
+      expect(@dictionary[1]).to eq(:one)
     end
 
   end
