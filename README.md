@@ -36,6 +36,7 @@ The new features of the program are:-
 
 Some example conversations are given below:-
 
+```
 USER: you are crazy
 HAL:  WE *ARE* WEIRD.
 
@@ -52,6 +53,7 @@ HAL:  YES *IT* IS.
 
 USER: My name is Jason.
 HAL:  I THINK ALAN TURING WAS A GIRLIE, JUST LIKE *MY* DEAR MAMA
+```
 
 The last response was generated from a combination of a discussion
 about Alan Turing, and Monty Python's Lumberjack Song.  Surely this

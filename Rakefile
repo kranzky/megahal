@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/jasonhutchens/megahal"
   gem.license = "UNLICENSE"
   gem.summary = %Q{MegaHAL is a learning chatterbot.}
-  gem.description = %Q{MegaHAL is a grammatical inference algorithm that can generate quasi natural language sentences in the context of a conversation.}
+  gem.description = %Q{Have a weird conversation with a computer.}
   gem.email = "jasonhutchens@gmail.com"
   gem.authors = ["Jason Hutchens"]
   gem.required_ruby_version = "~> 2.1"
