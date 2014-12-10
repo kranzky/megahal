@@ -1,57 +1,73 @@
+[![Gem Version](https://badge.fury.io/rb/megahal.svg)](http://badge.fury.io/rb/megahal)
+[![Dependency Status](https://gemnasium.com/jasonhutchens/megahal.png)](https://gemnasium.com/jasonhutchens/megahal)
+[![Build Status](https://semaphoreapp.com/api/v1/projects/6889bf33-e547-4200-a4fb-66b339a83d82/307128/shields_badge.svg)](https://semaphoreapp.com/jasonhutchens/megahal)
+[![Code Climate](https://codeclimate.com/github/jasonhutchens/megahal.png)](https://codeclimate.com/github/jasonhutchens/megahal)
+
 MegaHAL
 =======
 
 MegaHAL is a learning chatterbot.
 
-Design
-------
+This version was written quickly in homage of the original, which existed as
+early as 1992. The first record I have of it is the following USENET
+announcement from April 30, 1995.
 
-First, we segment the sentence into three arrays of IDs (puncs, words and
-norms). This is done partly for efficiency and partly to force us to abandon all
-hope of meaning. We're just dealing with numbers. The inverse operation is
-repairing the array of generated norms to yield a pleasing, correctly punctuated
-sentence in a human language.
+Have a weird conversation with a computer
+-----------------------------------------
 
-Given a sequence of norms, contexts of IDs (perhaps all triples of IDs
-regardless of separation, omitting duplicates) exite percepts, which are added
-to the short-term memory, with existing entries attenuated so the strongest
-seven survive.
+Recently I added a feature to my home page allowing the user to "talk" to a
+computer program of mine.  The program was not written very intelligently, so
+most of the time its replies consisted of incoherent babble.
 
-Given the short-term memory, a small collection of seeds is generated.  These
-seeds are then used to build a sequence of norms such that the sequence
-maximises the information of the seed collection. And this is repaired as above.
+Version 2 came and went, and now version 3 - MegaHAL - is ready for release.
+The new features of the program are:-
 
-A question-answer pair that is confirmed to have relevance is used to train the
-percept model. Percepts are created to represent triples from the question, and
-are trained with IDs from the answer norm. Percepts are merged when they attain
-a certain level of similarity with respect to their distribution.
+* A second-order markov model is used, and it is doubly-linked.  This
+  means that the computers sentences tend to be more grammatical.
+* Punctuation is supported, which segments the sentences realistically.
+* The reply given by the computer is based upon one of the words in
+  the input string.  The word selected is one that maximises the ratio
+  (number of times since word was last used)/(number of times word has
+  appeared).
+* The computers reply is generated from this keyword, and may be up to
+  100 words long.  The reply is generated in such a way that it is
+  impossible to get stuck in infinite loops.
+* The keyword used is highlighted in the reply.
 
-The generation uses a markov model and a long-distance model. The latter allows
-us to constrain the markovian generation based on the seeds that we're trying to
-generate. This is a type of pathfinding.
+Some example conversations are given below:-
 
-To repair a sequence of norms we insert puncs using the insert model. We then
-use a similar model to postulate words, one for adjacent puncs and one for
-adjacent norms. We then choose the maximal sequence of words.
+USER: you are crazy
+HAL:  WE *ARE* WEIRD.
 
-To many, perhaps all of the predictors but at least the percepts ones, we add the ability to forget:
+USER: What is the meaning of life oh wise one?
+HAL:  *LIFE* IS THE ROOM.
 
-* Rarely used entries in the distribution are removed
-* Similar contexts are merged
-* Low entropy contexts are removed
+USER: this is not getting us very far
+HAL:  YES I AM *GETTING* BORED OF GLOBAL DOMINATION.
 
-Contributing to megahal
------------------------
+USER: I have no idea.
+HAL:  *NO* IT IS IN HEAVEN.
+USER: Is it really?
+HAL:  YES *IT* IS.
 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+USER: My name is Jason.
+HAL:  I THINK ALAN TURING WAS A GIRLIE, JUST LIKE *MY* DEAR MAMA
+
+The last response was generated from a combination of a discussion
+about Alan Turing, and Monty Python's Lumberjack Song.  Surely this
+must be a sign of intelligence ;^)
+
+Have fun!
+
+Getting Started
+---------------
+
+```
+> gem install megahal
+> megahal
+```
 
 Copyright
 ---------
 
-Copyright (c) 2012 Jason Hutchens. See LICENSE.txt for further details.
+Copyright (c) 2014 Jason Hutchens. See UNLICENSE for further details.

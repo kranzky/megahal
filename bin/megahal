@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby -KU
-# encoding: UTF-8
+#!/usr/bin/env ruby
 
 require 'megahal'
 
