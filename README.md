@@ -3,6 +3,18 @@ MegaHAL
 
 MegaHAL is a learning chatterbot.
 
+TODO
+----
+
+* write generic predictor
+* wrap in a ruby gem
+* write a bunch of specs
+* test it on a reasonably large corpus
+* test performance and optimise
+---
+* firm up the design
+* use a generic predictor that has a valilla c implementation
+
 Design
 ------
 
@@ -54,4 +66,4 @@ Contributing to megahal
 Copyright
 ---------
 
-Copyright (c) 2014 Jason Hutchens. See LICENSE.txt for further details.
+Copyright (c) 2015 Jason Hutchens. See LICENSE.txt for further details.
