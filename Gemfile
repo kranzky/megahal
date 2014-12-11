@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sooth', '~> 0.1'
+gem 'sooth', '~> 0.2'
 
 group :development do
   gem 'rspec', '~> 3.1'

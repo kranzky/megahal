@@ -71,9 +71,9 @@ GEM
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.6.0)
-    sooth (0.1.0)
+    sooth (0.2.0)
     thread_safe (0.3.4)
-    yard (0.8.3)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -85,5 +85,5 @@ DEPENDENCIES
   rdoc (~> 4.1)
   rspec (~> 3.1)
   simplecov (~> 0.9)
-  sooth (~> 0.1)
+  sooth (~> 0.2)
   yard (~> 0.8)
