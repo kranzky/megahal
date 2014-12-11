@@ -47,6 +47,7 @@ class MegaHAL
   #
   # @param [Symbol] name The personality to be loaded.
   def become(name=:default)
+    raise ArgumentError, "no such personality" unless @@personalities.key?(name)
     clear
     _train(@@personalities[name])
   end
@@ -62,11 +63,9 @@ class MegaHAL
   # @return [String] MegaHAL's reply to the user's input, or the error
   #                  string if no reply could be formed.
   def reply(input, learn=true, error="I don't know enough to answer you yet!")
-    puncs, norms, words = _decompose(input.strip)
+    puncs, keywords, words = _decompose(input.strip)
 
-    _learn(puncs, norms, words) if learn
-
-    keywords = norms
+    _learn(puncs, keywords, words) if learn
 
     100.times do
       if norms = _generate(keywords)
@@ -196,14 +195,14 @@ class MegaHAL
   def _rewrite(norms)
     decode = Hash[@dictionary.to_a.map(&:reverse)]
 
-    # First we generate the sequence of words. This is slightly tricky, because
-    # it is possible to generate a word (based on the context of the previous
-    # word and the current norm) such that it is impossible to generate the next
-    # word in the sequence (because we may generate a word of a different case
-    # than what we have observed in the past). So we keep trying until we
-    # stumble upon a combination that works, or until we've tried too many
-    # times. Note that backtracking would need to go back an arbitrary number of
-    # steps, and is therefore too messy to implement.
+    # Here we generate the sequence of words and puncs. This is slightly tricky,
+    # because it is possible to generate a word (based on the context of the
+    # previous word and the current norm) such that it is impossible to generate
+    # the next word in the sequence (because we may generate a word of a
+    # different case than what we have observed in the past). So we keep trying
+    # until we stumble upon a combination that works, or until we've tried too
+    # many times. Note that backtracking would need to go back an arbitrary
+    # number of steps, and is therefore too messy to implement.
     words = []
     puncs = []
     context = [1, 1]
