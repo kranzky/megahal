@@ -18,6 +18,7 @@ class MegaHAL
   # Wipe MegaHAL's brain. Note that this wipes the personality too, allowing you
   # to begin from a truly blank slate.
   def clear
+    # TODO: new release so clear works
 #   @fore.clear    
 #   @back.clear    
 #   @case.clear    
@@ -82,6 +83,7 @@ class MegaHAL
   #
   # @param [String] filename The brain file to be saved.
   def save(filename)
+    # TODO: save dictionary and four models to a zip file
     raise
   end
 
@@ -89,15 +91,7 @@ class MegaHAL
   #
   # @param [String] filename The brain file to be loaded.
   def load(filename)
-    raise
-  end
-
-  # Merge a brain that has previously been saved. This is similar to #load, but
-  # doesn't clear MegaHAL's brain first. This makes it easy to merge several
-  # brain files together.
-  #
-  # @param [String] filename The brain file to be merged.
-  def merge(filename)
+    # TODO: load dictionary and four models from a zip file
     raise
   end
 
@@ -180,7 +174,6 @@ class MegaHAL
 
   def _generate(keywords)
     # TODO: keyword magic
-    # TODO: scoring and select "best"
     norms = []
     context = [1, 1]
     return nil if @fore.count(context) == 0
