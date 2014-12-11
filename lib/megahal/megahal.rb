@@ -44,10 +44,10 @@ class MegaHAL
   # parameter isn't one of those returned by #list. Note that this will clear
   # MegaHAL's brain first.
   #
-  # @param [Symbol] personality The personality to be loaded.
-  def become(personality=:default)
+  # @param [Symbol] name The personality to be loaded.
+  def become(name=:default)
     clear
-    _train(@@personalities[:default])
+    _train(@@personalities[name])
   end
 
   # Generate a reply to the user's input. If the learn parameter is set to true,
@@ -65,10 +65,9 @@ class MegaHAL
 
     _learn(puncs, norms, words) if learn
 
+    # TODO: keyword magic
+    # TODO: scoring and select "best"
     norms.clear
-    words.clear
-    puncs.clear
-
     context = [1, 1]
     return error if @fore.count(context) == 0
     loop do
@@ -81,25 +80,7 @@ class MegaHAL
       context.shift
     end
 
-    context = [1, 1]
-    norms.each do |norm|
-      context[1] = norm
-      limit = rand(@case.count(context)) + 1
-      words << @case.select(context, limit)  
-      raise if words.last == 0
-      context[0] = words.last
-    end
-
-    context = [1, 1]
-    (words + [1]).each do |word|
-      context << word
-      context.shift
-      limit = rand(@punc.count(context)) + 1
-      puncs << @punc.select(context, limit)  
-      raise if puncs.last == 0
-    end
-
-    _rewrite(puncs, norms, words)
+    _rewrite(norms)
   end
 
   # Save MegaHAL's brain to the specified binary file.
@@ -139,15 +120,12 @@ class MegaHAL
 
   def _train(data)
     data.map!(&:strip!)
-    data.each do |line|
-      puncs, norms, words = _decompose(line)
-      _learn(puncs, norms, words)
-    end
+    data.each { |line| _learn(_decompose(line)) }
     nil
   end
 
   def _learn(puncs, norms, words)
-    return [] if words.length == 0
+    return if words.length == 0
 
     context = [1, 1]
     norms.each do |norm|
@@ -165,6 +143,7 @@ class MegaHAL
     end
     @back.observe(context, 1)
 
+    decode = Hash[@dictionary.to_a.map(&:reverse)]
     context = [1, 1]
     words.zip(norms).each do |word, norm|
       context[1] = norm
@@ -178,12 +157,11 @@ class MegaHAL
       context.shift
       @punc.observe(context, punc)  
     end
-
-    norms
   end
 
   def _decompose(line, maximum_length=1024)
     line = "" if line.length > maximum_length
+    return [[], [], []] if line.length == 0
     puncs, words = _segment(line)
     norms = words.map(&:upcase)
     puncs.map! { |punc| @dictionary[punc] ||= @dictionary.length }
@@ -205,8 +183,29 @@ class MegaHAL
     sequence.partition.with_index { |symbol, index| index.even? }
   end
 
-  def _rewrite(puncs, norms, words)
+  def _rewrite(norms)
     decode = Hash[@dictionary.to_a.map(&:reverse)]
+
+    words = []
+    context = [1, 1]
+    norms.each do |norm|
+      context[1] = norm
+      limit = rand(@case.count(context)) + 1
+      words << @case.select(context, limit)
+      raise if words.last == 0
+      context[0] = words.last
+    end
+
+    puncs = []
+    context = [1, 1]
+    (words + [1]).each do |word|
+      context << word
+      context.shift
+      limit = rand(@punc.count(context)) + 1
+      puncs << @punc.select(context, limit)
+      raise if puncs.last == 0
+    end
+
     puncs.zip(words).flatten.map { |word| decode[word] }.join
   end
 end
