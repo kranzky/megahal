@@ -1,8 +1,12 @@
 require 'sooth'
 
 class MegaHAL
+  attr_accessor :characters, :learning
+
   # Create a new MegaHAL instance, loading the :default personality.
   def initialize
+    @learning = true
+    @characters = false
     @seed = Sooth::Predictor.new(0)
     @fore = Sooth::Predictor.new(0)
     @back = Sooth::Predictor.new(0)
@@ -53,23 +57,22 @@ class MegaHAL
     _train(@@personalities[name])
   end
 
-  # Generate a reply to the user's input. If the learn parameter is set to true,
+  # Generate a reply to the user's input. If the learning attribute is set to true,
   # MegaHAL will also learn from what the user said.  Note that it takes MegaHAL
   # about one second to generate about 500 replies.
   # 
   # @param [String] input A string that represents the user's input. If this is
   #                       nil, MegaHAL will attempt to reply with a greeting,
   #                       suitable for beginning a conversation.
-  # @param [Bool] learn Whether or not MegaHAL should learn the input.
   # @param [String] error The default reply, which will be used when no
   #                       suitable reply can be formed.
   #
   # @return [String] MegaHAL's reply to the user's input, or the error
   #                  string if no reply could be formed.
-  def reply(input, learn=true, error="I don't know enough to answer you yet!")
+  def reply(input, error="I don't know enough to answer you yet!")
     puncs, norms, words = _decompose(input ? input.strip : nil)
 
-    _learn(puncs, norms, words) if learn && norms
+    _learn(puncs, norms, words) if @learning && norms
 
     keyword_symbols =
       MegaHAL.extract(norms)
@@ -223,7 +226,12 @@ class MegaHAL
   # the original words themselves/
   def _segment(line)
     # split the sentence into an array of alternating words and word-separators
-    sequence = line.split(/([[:word:]]+)/)
+    sequence =
+      if @characters
+        line.split(/([[:word:]])/)
+      else
+        line.split(/([[:word:]]+)/)
+      end
     # ensure the array starts with and ends with a word-separator, even if it's the blank onw
     sequence << "" if sequence.last =~ /[[:word:]]+/
     sequence.unshift("") if sequence.first =~ /[[:word:]]+/

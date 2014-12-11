@@ -7,7 +7,10 @@ require 'highline/import'
 def list_menu(megahal)
   choose do |menu|
     menu.prompt = "? "
-    menu.choice(:cancel) { return }
+    menu.choice(:cancel) do
+      say('(cancelled)')
+      return
+    end
     menu.choice(:default) { megahal.become(:default) }
     menu.choice(:aliens) { megahal.become(:aliens) }
     menu.choice(:bill) { megahal.become(:bill) }
@@ -27,12 +30,42 @@ end
 def help_menu(megahal)
   choose do |menu|
     menu.prompt = "? "
-    menu.choice(:cancel) {}
-    menu.choice(:reset) { megahal.clear }
-    menu.choice(:brain) { list_menu(megahal) }
+    menu.choice(:cancel) do
+      say('(cancelled)')
+      return
+    end
+    menu.choice(:reset) do
+      megahal.clear
+      say('(brain cleared)')
+    end
+    menu.choice(:brain) do
+      list_menu(megahal)
+    end
     menu.choice(:train) {}
     menu.choice(:load) {}
     menu.choice(:save) {}
+    if megahal.characters
+      menu.choice(:words) do
+        megahal.characters = false
+        say('(using words)')
+      end
+    else
+      menu.choice(:characters) do
+        megahal.characters = true
+        say('(using characters)')
+      end
+    end
+    if megahal.learning
+      menu.choice(:ignore) do
+        megahal.learning = false
+        say('(stopped learning from user input)')
+      end
+    else
+      menu.choice(:learn) do
+        megahal.learning = true
+        say('(started learning from user input)')
+      end
+    end
     menu.choice(:quit) { exit }
   end
 end
