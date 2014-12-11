@@ -76,8 +76,19 @@ class MegaHAL
           .map { |keyword| @dictionary[keyword] }
           .compact
 
+    input_symbols = (norms || []).map { |norm| @dictionary[norm] }
+
     100.times do
       if norm_symbols = _generate(keyword_symbols)
+        next if norm_symbols == input_symbols
+        if reply = _rewrite(norm_symbols)
+          return reply
+        end
+      end
+    end
+
+    if norm_symbols = _generate([])
+      if norm_symbols != input_symbols
         if reply = _rewrite(norm_symbols)
           return reply
         end
