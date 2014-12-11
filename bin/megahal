@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'megahal'
+
+megahal = MegaHAL.new
+
+10000.times { puts megahal.reply("", false) }

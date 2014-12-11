@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.date = "2014-12-11"
   s.description = "Have a weird conversation with a computer."
   s.email = "jasonhutchens@gmail.com"
+  s.executables = ["megahal"]
   s.extra_rdoc_files = [
     "README.md"
   ]
@@ -24,10 +25,23 @@ Gem::Specification.new do |s|
     "Rakefile",
     "UNLICENSE",
     "VERSION",
+    "bin/megahal",
     "lib/megahal.rb",
+    "lib/megahal/keyword.rb",
     "lib/megahal/megahal.rb",
     "lib/megahal/personalities.rb",
+    "lib/megahal/personalities/aliens.rb",
+    "lib/megahal/personalities/bill.rb",
+    "lib/megahal/personalities/caitsith.rb",
     "lib/megahal/personalities/default.rb",
+    "lib/megahal/personalities/ferris.rb",
+    "lib/megahal/personalities/manson.rb",
+    "lib/megahal/personalities/pepys.rb",
+    "lib/megahal/personalities/pulp.rb",
+    "lib/megahal/personalities/scream.rb",
+    "lib/megahal/personalities/sherlock.rb",
+    "lib/megahal/personalities/startrek.rb",
+    "lib/megahal/personalities/starwars.rb",
     "megahal.gemspec"
   ]
   s.homepage = "http://github.com/jasonhutchens/megahal"
