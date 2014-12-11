@@ -222,6 +222,7 @@ class MegaHAL
         raise if i == 0
         attempts += 1
         words.clear
+        puncs.clear
         i = 0
         next
       end
@@ -233,6 +234,7 @@ class MegaHAL
       if count == 0
         attempts += 1
         words.clear
+        puncs.clear
         i = 0
         next
       end
@@ -245,6 +247,7 @@ class MegaHAL
         if count == 0
           attempts += 1
           words.clear
+          puncs.clear
           i = 0
           next
         end
