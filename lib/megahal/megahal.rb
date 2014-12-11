@@ -18,13 +18,12 @@ class MegaHAL
   # Wipe MegaHAL's brain. Note that this wipes the personality too, allowing you
   # to begin from a truly blank slate.
   def clear
-    # TODO: new release so clear works
-#   @seed.clear    
-#   @fore.clear    
-#   @back.clear    
-#   @seed.clear
-#   @case.clear    
-#   @punc.clear    
+    @seed.clear    
+    @fore.clear    
+    @back.clear    
+    @seed.clear
+    @case.clear    
+    @punc.clear    
     @dictionary = { "<error>" => 0, "<fence>" => 1, "<blank>" => 2 }
     nil
   end

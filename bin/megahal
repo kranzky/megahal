@@ -27,8 +27,9 @@ end
 def help_menu(megahal)
   choose do |menu|
     menu.prompt = "? "
-    menu.choice(:clear) { megahal.clear }
-    menu.choice(:become) { list_menu(megahal) }
+    menu.choice(:cancel) {}
+    menu.choice(:reset) { megahal.clear }
+    menu.choice(:brain) { list_menu(megahal) }
     menu.choice(:train) {}
     menu.choice(:load) {}
     menu.choice(:save) {}
@@ -40,8 +41,10 @@ megahal = MegaHAL.new
 say(megahal.reply(nil))
 loop do
   input = ask("> ")
-  if input.strip.downcase =~ /^[\/#](help|quit|exit|info|command)/
+  if input.strip.downcase =~ /^[\/\\#@](help|menu|info|command)/
     help_menu(megahal)
+  elsif input.strip.downcase =~ /^[\/\\#@](quit|exit)/
+    exit
   else
     say(megahal.reply(input))
   end
