@@ -65,10 +65,13 @@ class MegaHAL
 
     _learn(puncs, norms, words) if learn
 
+    keywords = norms
+
     100.times do
-      norms = _generate(norms)
-      if reply = _rewrite(norms)
-        return reply
+      if norms = _generate(keywords)
+        if reply = _rewrite(norms)
+          return reply
+        end
       end
     end
 
@@ -111,7 +114,7 @@ class MegaHAL
   private
 
   def _train(data)
-    data.map!(&:strip!)
+    data.map!(&:strip)
     data.each { |line| _learn(*_decompose(line)) }
     nil
   end
@@ -175,12 +178,12 @@ class MegaHAL
     sequence.partition.with_index { |symbol, index| index.even? }
   end
 
-  def _generate(norms)
+  def _generate(keywords)
     # TODO: keyword magic
     # TODO: scoring and select "best"
-    norms.clear
+    norms = []
     context = [1, 1]
-    return error if @fore.count(context) == 0
+    return nil if @fore.count(context) == 0
     loop do
       limit = rand(@fore.count(context)) + 1
       norm = @fore.select(context, limit)
