@@ -65,22 +65,14 @@ class MegaHAL
 
     _learn(puncs, norms, words) if learn
 
-    # TODO: keyword magic
-    # TODO: scoring and select "best"
-    norms.clear
-    context = [1, 1]
-    return error if @fore.count(context) == 0
-    loop do
-      limit = rand(@fore.count(context)) + 1
-      norm = @fore.select(context, limit)
-      raise if norm == 0
-      break if norm == 1
-      norms << norm
-      context << norm
-      context.shift
+    100.times do
+      norms = _generate(norms)
+      if reply = _rewrite(norms)
+        return reply
+      end
     end
 
-    _rewrite(norms)
+    return error
   end
 
   # Save MegaHAL's brain to the specified binary file.
@@ -183,6 +175,24 @@ class MegaHAL
     sequence.partition.with_index { |symbol, index| index.even? }
   end
 
+  def _generate(norms)
+    # TODO: keyword magic
+    # TODO: scoring and select "best"
+    norms.clear
+    context = [1, 1]
+    return error if @fore.count(context) == 0
+    loop do
+      limit = rand(@fore.count(context)) + 1
+      norm = @fore.select(context, limit)
+      raise if norm == 0
+      break if norm == 1
+      norms << norm
+      context << norm
+      context.shift
+    end
+    norms
+  end
+
   # Here we take a generated sequence of norms and convert them back to a string
   # that may be displayed to the user as output. This involves using the @case
   # model to rewrite each norm as a word, and then using the @punc model to
@@ -194,62 +204,54 @@ class MegaHAL
     # it is possible to generate a word (based on the context of the previous
     # word and the current norm) such that it is impossible to generate the next
     # word in the sequence (because we may generate a word of a different case
-    # than what we have observed in the past). So we check for this, and
-    # backtrack to avoid the issue if necessary. The same is true of the word
-    # separators.
+    # than what we have observed in the past). So we keep trying until we
+    # stumble upon a combination that works, or until we've tried too many
+    # times. Note that backtracking would need to go back an arbitrary number of
+    # steps, and is therefore too messy to implement.
     words = []
+    puncs = []
     context = [1, 1]
     i = 0
+    attempts = 0
     while words.length != norms.length
+      return nil if attempts >= 100
       context[0] = (i == 0) ? 1 : words[i-1]
       context[1] = norms[i]
       count = @case.count(context)
-      if (count == 0)
-        # we cannot generate a word for the current context (of previous word
-        # and current norm), which means that we need to back up and try again
+      if count == 0
         raise if i == 0
-        words.pop
-        i = words.length
+        attempts += 1
+        words.clear
+        i = 0
         next
       end
       limit = rand(count) + 1
       words << @case.select(context, limit)
-      raise if words.last == 0
       context[0] = (i == 0) ? 1 : words[i-1]
       context[1] = words[i]
-      if (@punc.count(context) == 0)
-        # we cannot generate a word separator between the previous word and the
-        # current word, which means that we need to back up and try again
-        words.pop
-        i = words.length
+      count = @punc.count(context)
+      if count == 0
+        attempts += 1
+        words.clear
+        i = 0
         next
       end
+      limit = rand(count) + 1
+      puncs << @punc.select(context, limit)
       if words.length == norms.length
         context << 1
         context.shift
-        if @punc.count(context) == 0
-          # we cannot generate a word separator between the current word and
-          # the special symbol that denotes the end of our utterance, which
-          # means we need to back up and try again
-          words.pop
-          i = words.length
+        count = @punc.count(context)
+        if count == 0
+          attempts += 1
+          words.clear
+          i = 0
           next
         end
+        limit = rand(count) + 1
+        puncs << @punc.select(context, limit)
       end
       i += 1
-    end
-
-    # Next we generate the word separators. Because we have guaranteed (due to
-    # the backtracking above) that all adjacent pairs of words have previously
-    # been observed, this process is guaranteed to succeed.
-    puncs = []
-    context = [1, 1]
-    (words + [1]).each do |word|
-      context << word
-      context.shift
-      limit = rand(@punc.count(context)) + 1
-      puncs << @punc.select(context, limit)
-      raise if puncs.last == 0
     end
 
     puncs.zip(words).flatten.map { |word| decode[word] }.join
