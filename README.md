@@ -8,9 +8,16 @@ MegaHAL
 
 MegaHAL is a learning chatterbot.
 
-This version was written quickly in homage of the original, which existed as
-early as 1992. The first record I have of it is the following USENET
-announcement from April 30, 1995.
+You can run it as a command-line application, or embed it in your own
+application and make calls to it via a simple
+[API](http://rubydoc.info/github/jasonhutchens/megahal/master/frames).
+
+It is build on top of [Sooth](https://github.com/jasonhutchens/sooth), a simple
+stochastic predictive model.
+
+This new version of MegaHAL was written quickly in homage of the original,
+which existed as early as 1991. The first record I have of it is the following
+USENET announcement from April 30, 1995.
 
 Have a weird conversation with a computer
 -----------------------------------------

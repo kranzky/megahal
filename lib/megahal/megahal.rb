@@ -120,7 +120,7 @@ class MegaHAL
 
   def _train(data)
     data.map!(&:strip!)
-    data.each { |line| _learn(_decompose(line)) }
+    data.each { |line| _learn(*_decompose(line)) }
     nil
   end
 
@@ -183,19 +183,65 @@ class MegaHAL
     sequence.partition.with_index { |symbol, index| index.even? }
   end
 
+  # Here we take a generated sequence of norms and convert them back to a string
+  # that may be displayed to the user as output. This involves using the @case
+  # model to rewrite each norm as a word, and then using the @punc model to
+  # insert appropriate word separators.
   def _rewrite(norms)
     decode = Hash[@dictionary.to_a.map(&:reverse)]
 
+    # First we generate the sequence of words. This is slightly tricky, because
+    # it is possible to generate a word (based on the context of the previous
+    # word and the current norm) such that it is impossible to generate the next
+    # word in the sequence (because we may generate a word of a different case
+    # than what we have observed in the past). So we check for this, and
+    # backtrack to avoid the issue if necessary. The same is true of the word
+    # separators.
     words = []
     context = [1, 1]
-    norms.each do |norm|
-      context[1] = norm
-      limit = rand(@case.count(context)) + 1
+    i = 0
+    while words.length != norms.length
+      context[0] = (i == 0) ? 1 : words[i-1]
+      context[1] = norms[i]
+      count = @case.count(context)
+      if (count == 0)
+        # we cannot generate a word for the current context (of previous word
+        # and current norm), which means that we need to back up and try again
+        raise if i == 0
+        words.pop
+        i = words.length
+        next
+      end
+      limit = rand(count) + 1
       words << @case.select(context, limit)
       raise if words.last == 0
-      context[0] = words.last
+      context[0] = (i == 0) ? 1 : words[i-1]
+      context[1] = words[i]
+      if (@punc.count(context) == 0)
+        # we cannot generate a word separator between the previous word and the
+        # current word, which means that we need to back up and try again
+        words.pop
+        i = words.length
+        next
+      end
+      if words.length == norms.length
+        context << 1
+        context.shift
+        if @punc.count(context) == 0
+          # we cannot generate a word separator between the current word and
+          # the special symbol that denotes the end of our utterance, which
+          # means we need to back up and try again
+          words.pop
+          i = words.length
+          next
+        end
+      end
+      i += 1
     end
 
+    # Next we generate the word separators. Because we have guaranteed (due to
+    # the backtracking above) that all adjacent pairs of words have previously
+    # been observed, this process is guaranteed to succeed.
     puncs = []
     context = [1, 1]
     (words + [1]).each do |word|
