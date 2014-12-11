@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<sooth>, ["~> 0.2"])
+      s.add_runtime_dependency(%q<highline>, ["~> 1.6"])
       s.add_development_dependency(%q<rspec>, ["~> 3.1"])
       s.add_development_dependency(%q<yard>, ["~> 0.8"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.1"])
@@ -64,6 +65,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<byebug>, ["~> 3.5"])
     else
       s.add_dependency(%q<sooth>, ["~> 0.2"])
+      s.add_dependency(%q<highline>, ["~> 1.6"])
       s.add_dependency(%q<rspec>, ["~> 3.1"])
       s.add_dependency(%q<yard>, ["~> 0.8"])
       s.add_dependency(%q<rdoc>, ["~> 4.1"])
@@ -74,6 +76,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<sooth>, ["~> 0.2"])
+    s.add_dependency(%q<highline>, ["~> 1.6"])
     s.add_dependency(%q<rspec>, ["~> 3.1"])
     s.add_dependency(%q<yard>, ["~> 0.8"])
     s.add_dependency(%q<rdoc>, ["~> 4.1"])

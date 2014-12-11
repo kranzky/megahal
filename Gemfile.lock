@@ -81,6 +81,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.7)
   byebug (~> 3.5)
+  highline (~> 1.6)
   jeweler (~> 2.0)
   rdoc (~> 4.1)
   rspec (~> 3.1)

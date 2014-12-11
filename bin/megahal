@@ -1,7 +1,48 @@
 #!/usr/bin/env ruby
 
+require 'byebug'
 require 'megahal'
+require 'highline/import'
+
+def list_menu(megahal)
+  choose do |menu|
+    menu.prompt = "? "
+    menu.choice(:cancel) { return }
+    menu.choice(:default) { megahal.become(:default) }
+    menu.choice(:aliens) { megahal.become(:aliens) }
+    menu.choice(:bill) { megahal.become(:bill) }
+    menu.choice(:caitsith) { megahal.become(:caitsith) }
+    menu.choice(:ferris) { megahal.become(:ferris) }
+    menu.choice(:manson) { megahal.become(:manson) }
+    menu.choice(:pepys) { megahal.become(:pepys) }
+    menu.choice(:pulp) { megahal.become(:pulp) }
+    menu.choice(:scream) { megahal.become(:scream) }
+    menu.choice(:sherlock) { megahal.become(:sherlock) }
+    menu.choice(:startrek) { megahal.become(:startrek) }
+    menu.choice(:starwars) { megahal.become(:starwars) }
+  end
+  say(megahal.reply(nil))
+end
+
+def help_menu(megahal)
+  choose do |menu|
+    menu.prompt = "? "
+    menu.choice(:clear) { megahal.clear }
+    menu.choice(:become) { list_menu(megahal) }
+    menu.choice(:train) {}
+    menu.choice(:load) {}
+    menu.choice(:save) {}
+    menu.choice(:quit) { exit }
+  end
+end
 
 megahal = MegaHAL.new
-
-10000.times { puts megahal.reply("", false) }
+say(megahal.reply(nil))
+loop do
+  input = ask("> ")
+  if input.strip.downcase =~ /^[\/#](help|quit|exit|info|command)/
+    help_menu(megahal)
+  else
+    say(megahal.reply(input))
+  end
+end
