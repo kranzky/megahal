@@ -4,6 +4,21 @@ require 'byebug'
 require 'megahal'
 require 'highline/import'
 
+say(<<-EOS)
++----------------------------------------------------------+
+|                                                          |
+|  #    #  ######   ####     ##    #    #    ##    #       |
+|  ##  ##  #       #    #   #  #   #    #   #  #   #       |
+|  # ## #  #####   #       #    #  ######  #    #  #       |
+|  #    #  #       #  ###  ######  #    #  ######  #       |
+|  #    #  #       #    #  #    #  #    #  #    #  #       |
+|  #    #  ######   ####   #    #  #    #  #    #  ######  |
+|                                                          |
+|    Type "/help" for options and "/quit" to terminate.    |
++----------------------------------------------------------+
+
+EOS
+
 def list_menu(megahal)
   choose do |menu|
     menu.prompt = "? "
