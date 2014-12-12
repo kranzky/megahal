@@ -11,3 +11,4 @@ pkg
 .ruby-gemset
 .ditz-config
 tmp
+megahal.log

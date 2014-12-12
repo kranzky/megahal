@@ -25,7 +25,6 @@ class MegaHAL
     @seed.clear    
     @fore.clear    
     @back.clear    
-    @seed.clear
     @case.clear    
     @punc.clear    
     @dictionary = { "<error>" => 0, "<fence>" => 1, "<blank>" => 2 }
@@ -81,6 +80,10 @@ class MegaHAL
 
     input_symbols = (norms || []).map { |norm| @dictionary[norm] }
 
+    # TODO: generate one random utterance without using a keyword
+    # TODO: maintain a list of utterance-score pairings
+    # TODO: calculate score using auxilliary keywords too
+    # TODO: sort by descending score and rewrite until success
     100.times do
       if norm_symbols = _generate(keyword_symbols)
         next if norm_symbols == input_symbols
@@ -281,6 +284,7 @@ class MegaHAL
   # This is classic Markovian generation; using a model, start with a context
   # and continue until we hit a <fence> symbol.
   def _random_walk(model, static_context)
+    # TODO: favour keywords when generating
     context = static_context.dup
     results = []
     return [] if model.count(context) == 0
@@ -317,6 +321,7 @@ class MegaHAL
     i = 0
     attempts = 0
     while word_symbols.length != norm_symbols.length
+      # TODO: mimimise number of attempts
       return nil if attempts >= 100
       # We're trying to rewrite norms to words, so build a context for the @case
       # model, of the previous word and the current norm.

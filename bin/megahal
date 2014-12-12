@@ -4,7 +4,7 @@ require 'megahal'
 require 'highline/import'
 require 'hodel_3000_compliant_logger'
 
-say(<<-EOS)
+say("<%= color('" + <<-EOS + "', BOLD) %>")
 +----------------------------------------------------------+
 |                                                          |
 |  #    #  ######   ####     ##    #    #    ##    #       |
@@ -28,15 +28,17 @@ class MegaLog
     @logger.info "MegaHAL Stopped"
   end
   def status(message)
-    say("(#{message})")
     @logger.info "(#{message})"
+    message = HighLine.color("(#{message})", :dark, :yellow)
+    say(message)
   end
   def user(message)
     @logger.info "USER: #{message}"
   end
   def puts(message)
-    say(message)
     @logger.info "MH10: #{message}"
+    message = HighLine.color(message, :bold, :green)
+    say(message)
   end
 end
 
