@@ -26,6 +26,7 @@ GEM
       oauth2
     hashie (3.3.2)
     highline (1.6.21)
+    hodel_3000_compliant_logger (0.1.1)
     jeweler (2.0.1)
       builder
       bundler (>= 1.0)
@@ -82,6 +83,7 @@ DEPENDENCIES
   bundler (~> 1.7)
   byebug (~> 3.5)
   highline (~> 1.6)
+  hodel_3000_compliant_logger (~> 0.1)
   jeweler (~> 2.0)
   rdoc (~> 4.1)
   rspec (~> 3.1)

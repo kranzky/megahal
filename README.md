@@ -71,9 +71,75 @@ Have fun!
 Getting Started
 ---------------
 
+Running the command-line version of MegaHAL is simple:
+
 ```
 > gem install megahal
 > megahal
++----------------------------------------------------------+
+|                                                          |
+|  #    #  ######   ####     ##    #    #    ##    #       |
+|  ##  ##  #       #    #   #  #   #    #   #  #   #       |
+|  # ## #  #####   #       #    #  ######  #    #  #       |
+|  #    #  #       #  ###  ######  #    #  ######  #       |
+|  #    #  #       #    #  #    #  #    #  #    #  #       |
+|  #    #  ######   ####   #    #  #    #  #    #  ######  |
+|                                                          |
+|    Type "/help" for options and "/quit" to terminate.    |
++----------------------------------------------------------+
+
+Greetings and salutations to thee and thine.
+>
+```
+
+If you type `/help` at the prompt, you'll be presented with a menu:
+
+```
+1. cancel
+2. reset
+3. brain
+4. train
+5. load
+6. save
+7. characters
+8. ignore
+9. quit
+```
+
+Make a selection by typing the number or the name of the menu item:
+
+1. `cancel`: go back without making a selection
+1. `reset`: clear MegaHAL's brain, resetting to a blank slate
+1. `brain`: choose from a number of existing personalities (see below)
+1. `train`: give MegaHAL a plain text file to learn from
+1. `load`: load a previously saved brain from a file
+1. `save`: save the current MegaHAL brain to a file
+1. `characters`: make MegaHAL use characters instead of words; this may be better for some languages (such as Chinese)
+1. `ignore`: prevent MegaHAL from learning from user input; this is good if you want to chat without introducing changes to the brain
+
+If you select the `brain` menu item above, you'll be presented with a list of
+pre-existing MegaHAL brains to choose from:
+
+1. `cancel`: go back without making a selection
+2. `default`: the personality used for the 1998 Loebner competition
+3. `aliens`: talk with Bishop from Aliens!
+4. `bill`: talk with Bill Clinton (thanks to Matt Stokes)!
+5. `caitsith`: talk with Cait Sith from FFVII (thanks to Sailor Solathei)
+6. `ferris`: talk with Mr. Ferris Bueller himself! Bueller! Bueller!
+7. `manson`: talk with MegaMANSON, the Marylin Manson personality (thanks to Jonathan Peck)
+8. `pepys`: talk with Samuel Pepys, taken from the @samuelpepys Twitter feed
+9. `pulp`: talk with Marsellus Wallace from Pulp Fiction!
+10. `scream`: talk with Randy from Scream!
+11. `sherlock`: talk with Sherlock Holmes, with quotes taken from all the books
+12. `startrek`: talk with Data from Star Trek (thanks to mbaker)
+13. `starwars`: talk with Threepio from the Star Wars Trilogy!
+
+Example
+-------
+
+Here is an example conversation transcript:
+
+```
 ```
 
 Copyright

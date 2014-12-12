@@ -2,6 +2,7 @@
 
 require 'megahal'
 require 'highline/import'
+require 'hodel_3000_compliant_logger'
 
 say(<<-EOS)
 +----------------------------------------------------------+
@@ -18,42 +19,102 @@ say(<<-EOS)
 
 EOS
 
-def list_menu(megahal)
-  choose do |menu|
-    menu.prompt = "? "
-    menu.choice(:cancel) do
-      say('(cancelled)')
-      return
-    end
-    menu.choice(:default) { megahal.become(:default) }
-    menu.choice(:aliens) { megahal.become(:aliens) }
-    menu.choice(:bill) { megahal.become(:bill) }
-    menu.choice(:caitsith) { megahal.become(:caitsith) }
-    menu.choice(:ferris) { megahal.become(:ferris) }
-    menu.choice(:manson) { megahal.become(:manson) }
-    menu.choice(:pepys) { megahal.become(:pepys) }
-    menu.choice(:pulp) { megahal.become(:pulp) }
-    menu.choice(:scream) { megahal.become(:scream) }
-    menu.choice(:sherlock) { megahal.become(:sherlock) }
-    menu.choice(:startrek) { megahal.become(:startrek) }
-    menu.choice(:starwars) { megahal.become(:starwars) }
+class MegaLog
+  def initialize
+    @logger = Hodel3000CompliantLogger.new("megahal.log")
+    @logger.info "MegaHAL Started"
   end
-  say(megahal.reply(nil))
+  def exit
+    @logger.info "MegaHAL Stopped"
+  end
+  def status(message)
+    say("(#{message})")
+    @logger.info "(#{message})"
+  end
+  def user(message)
+    @logger.info "USER: #{message}"
+  end
+  def puts(message)
+    say(message)
+    @logger.info "MH10: #{message}"
+  end
 end
 
-def help_menu(megahal)
+log = MegaLog.new
+
+def list_menu(megahal, log)
   choose do |menu|
     menu.prompt = "? "
     menu.choice(:cancel) do
-      say('(cancelled)')
+      log.status('cancelled')
+      return
+    end
+    menu.choice(:default) do
+      megahal.become(:default)
+      log.status('brain changed to the original loebner prize version')
+    end
+    menu.choice(:aliens) do
+      megahal.become(:aliens)
+      log.status('brain changed to bishop from aliens')
+    end
+    menu.choice(:bill) do
+      megahal.become(:bill)
+      log.status('brain changed to bill gates')
+    end
+    menu.choice(:caitsith) do
+      megahal.become(:caitsith)
+      log.status('brain changed to cait sith from ffvii')
+    end
+    menu.choice(:ferris) do
+      megahal.become(:ferris)
+      log.status('brain changed to ferris bueller')
+    end
+    menu.choice(:manson) do
+      megahal.become(:manson)
+      log.status('brain changed to marylin manson')
+    end
+    menu.choice(:pepys) do
+      megahal.become(:pepys)
+      log.status('brain changed to samuel pepys')
+    end
+    menu.choice(:pulp) do
+      megahal.become(:pulp)
+      log.status('brain changed to marsellus wallace from pulp fiction')
+    end
+    menu.choice(:scream) do
+      megahal.become(:scream)
+      log.status('brain changed to randy from scream')
+    end
+    menu.choice(:sherlock) do
+      megahal.become(:sherlock)
+      log.status('brain changed to sherlock holmes')
+    end
+    menu.choice(:startrek) do
+      megahal.become(:startrek)
+      log.status('brain changed to data from star trek')
+    end
+    menu.choice(:starwars) do
+      megahal.become(:starwars)
+      log.status('brain changed to threepio from star wars')
+    end
+  end
+  log.puts(megahal.reply(nil))
+end
+
+def help_menu(megahal, log)
+  choose do |menu|
+    menu.prompt = "? "
+    menu.choice(:cancel) do
+      log.status('cancelled')
       return
     end
     menu.choice(:reset) do
       megahal.clear
-      say('(brain cleared)')
+      log.status('brain cleared')
     end
     menu.choice(:brain) do
-      list_menu(megahal)
+      log.status('show brain menu')
+      list_menu(megahal, log)
     end
     menu.choice(:train) {}
     menu.choice(:load) {}
@@ -61,38 +122,48 @@ def help_menu(megahal)
     if megahal.characters
       menu.choice(:words) do
         megahal.characters = false
-        say('(using words)')
+        log.status('use words instead of characters')
       end
     else
       menu.choice(:characters) do
         megahal.characters = true
-        say('(using characters)')
+        log.status('use characters instead of words')
       end
     end
     if megahal.learning
       menu.choice(:ignore) do
         megahal.learning = false
-        say('(stopped learning from user input)')
+        log.status('stop learning from user input')
       end
     else
       menu.choice(:learn) do
         megahal.learning = true
-        say('(started learning from user input)')
+        log.status('start learning from user input')
       end
     end
-    menu.choice(:quit) { exit }
+    menu.choice(:quit) do
+      log.status('exiting')
+      exit
+    end
   end
 end
 
 megahal = MegaHAL.new
-say(megahal.reply(nil))
-loop do
-  input = ask("> ")
-  if input.strip.downcase =~ /^[\/\\#@](help|menu|info|command)/
-    help_menu(megahal)
-  elsif input.strip.downcase =~ /^[\/\\#@](quit|exit)/
-    exit
-  else
-    say(megahal.reply(input))
+log.puts(megahal.reply(nil))
+begin
+  loop do
+    input = ask("> ").strip
+    log.user(input)
+    if input.downcase =~ /^[\/\\#@](help|menu|info|list|h|\?)$/
+      log.status('show help menu')
+      help_menu(megahal, log)
+    elsif input.downcase =~ /^[\/\\#@](quit|exit|q|x)$/
+      log.status('exiting')
+      exit
+    else
+      log.puts(megahal.reply(input))
+    end
   end
+ensure
+  log.exit
 end

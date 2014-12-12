@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sooth', '~> 0.3'
 gem 'highline', '~> 1.6'
+gem 'hodel_3000_compliant_logger', '~> 0.1'
 
 group :development do
   gem 'rspec', '~> 3.1'
