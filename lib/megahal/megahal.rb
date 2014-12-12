@@ -109,6 +109,11 @@ class MegaHAL
   # @param [String] filename The brain file to be saved.
   def save(filename)
     # TODO: save dictionary and five models to a zip file
+    #       - create working directory in tmp
+    #       - save dictionary there with marshal
+    #       - save five models there
+    #       - zip it up
+    #       - remove working directory
     raise
   end
 
@@ -117,6 +122,10 @@ class MegaHAL
   # @param [String] filename The brain file to be loaded.
   def load(filename)
     # TODO: load dictionary and five models from a zip file
+    #       - extract to working directory in tmp
+    #       - load dictionary
+    #       - load five models
+    #       - remove working directory
     raise
   end
 

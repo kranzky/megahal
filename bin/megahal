@@ -59,21 +59,9 @@ def list_menu(megahal, log)
       megahal.become(:aliens)
       log.status('brain changed to bishop from aliens')
     end
-    menu.choice(:bill) do
-      megahal.become(:bill)
-      log.status('brain changed to bill gates')
-    end
-    menu.choice(:caitsith) do
-      megahal.become(:caitsith)
-      log.status('brain changed to cait sith from ffvii')
-    end
     menu.choice(:ferris) do
       megahal.become(:ferris)
       log.status('brain changed to ferris bueller')
-    end
-    menu.choice(:manson) do
-      megahal.become(:manson)
-      log.status('brain changed to marylin manson')
     end
     menu.choice(:pepys) do
       megahal.become(:pepys)
@@ -82,10 +70,6 @@ def list_menu(megahal, log)
     menu.choice(:pulp) do
       megahal.become(:pulp)
       log.status('brain changed to marsellus wallace from pulp fiction')
-    end
-    menu.choice(:scream) do
-      megahal.become(:scream)
-      log.status('brain changed to randy from scream')
     end
     menu.choice(:sherlock) do
       megahal.become(:sherlock)
