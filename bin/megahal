@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'byebug'
 require 'megahal'
 require 'highline/import'
 
