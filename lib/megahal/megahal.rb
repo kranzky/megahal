@@ -68,7 +68,7 @@ class MegaHAL
   #
   # @return [String] MegaHAL's reply to the user's input, or the error
   #                  string if no reply could be formed.
-  def reply(input, error="I don't know enough to answer you yet!")
+  def reply(input, error="...")
     puncs, norms, words = _decompose(input ? input.strip : nil)
 
     _learn(puncs, norms, words) if @learning && norms
@@ -307,75 +307,59 @@ class MegaHAL
   def _rewrite(norm_symbols)
     decode = Hash[@dictionary.to_a.map(&:reverse)]
 
-    # Here we generate the sequence of words and puncs. This is slightly tricky,
-    # because it is possible to generate a word (based on the context of the
-    # previous word and the current norm) such that it is impossible to generate
-    # the next word in the sequence (because we may generate a word of a
-    # different case than what we have observed in the past). So we keep trying
-    # until we stumble upon a combination that works, or until we've tried too
-    # many times. Note that backtracking would need to go back an arbitrary
-    # number of steps, and is therefore too messy to implement.
+    # Here we generate the sequence of words. This is slightly tricky, because
+    # it is possible to generate a word (based on the context of the previous
+    # word and the current norm) such that it is impossible to generate the next
+    # word in the sequence (because we may generate a word of a different case
+    # than what we have observed in the past). So we keep trying until we
+    # stumble upon a combination that works, or until we've tried too many
+    # times. Note that backtracking would need to go back an arbitrary number of
+    # steps, and is therefore too messy to implement.
     word_symbols = []
-    punc_symbols = []
     context = [1, 1]
     i = 0
-    attempts = 0
+    retries = 0
     while word_symbols.length != norm_symbols.length
-      # TODO: mimimise number of attempts
-      return nil if attempts >= 100
+      return nil if retries > 9
       # We're trying to rewrite norms to words, so build a context for the @case
-      # model, of the previous word and the current norm.
+      # model, of the previous word and the current norm.  This may fail if the
+      # previous word hasn't been observed adjacent to the current norm, which
+      # will happen if the rewrote the previous norm to a different case that
+      # what was observed previously.
       context[0] = (i == 0) ? 1 : word_symbols[i-1]
       context[1] = norm_symbols[i]
       count = @case.count(context)
-      if count == 0
-        # This may fail if the previous word hasn't been observed adjacent to
-        # the current norm, which will happen if the rewrote the previous norm
-        # to a different case that what was observed previously. So we retry.
-        raise if i == 0
-        attempts += 1
-        word_symbols.clear
-        punc_symbols.clear
-        i = 0
-        next
-      end
-      limit = rand(count) + 1
-      word_symbols << @case.select(context, limit)
-      # We've used the case model to rewrite the current norm to a word. Now we
-      # build a context for the @punc model of the previous word and the current
-      # word, and use that to select a word-separator to go between them.
-      context[0] = (i == 0) ? 1 : word_symbols[i-1]
-      context[1] = word_symbols[i]
-      count = @punc.count(context)
-      if count == 0
-        # This may also fail if the particular form of the two adjacent words
-        # have never been observed together, so retry again.
-        attempts += 1
-        word_symbols.clear
-        punc_symbols.clear
-        i = 0
-        next
-      end
-      limit = rand(count) + 1
-      punc_symbols << @punc.select(context, limit)
-      # Finally, if we've finished rewriting the words, we need to generate one
-      # more word-separator to end the sentence with.
-      if word_symbols.length == norm_symbols.length
-        context << 1
-        context.shift
-        count = @punc.count(context)
-        if count == 0
-          # And, as before, retry if the generation fails.
-          attempts += 1
-          word_symbols.clear
-          punc_symbols.clear
-          i = 0
-          next
-        end
+      unless failed = (count == 0)
         limit = rand(count) + 1
-        punc_symbols << @punc.select(context, limit)
+        word_symbols << @case.select(context, limit)
+      end
+      if (word_symbols.length == norm_symbols.length)
+        # We need to check that the final word has been previously observed.
+        context[0] = word_symbols.last
+        context[1] = 1
+        failed = (@punc.count(context) == 0)
+      end
+      if failed
+        raise if i == 0
+        retries += 1
+        word_symbols.clear
+        i = 0
+        next
       end
       i += 1
+    end
+
+    # We've used the case model to rewrite the norms to a words in a way that
+    # guarantees that each adjacent pair of words has been previously observed.
+    # Now we use the @punc model to generate the word-separators to be inserted
+    # between the words in the reply.
+    punc_symbols = []
+    context = [1, 1]
+    (word_symbols + [1]).each do |word|
+      context << word
+      context.shift
+      limit = rand(@punc.count(context)) + 1
+      punc_symbols << @punc.select(context, limit)
     end
 
     # Finally we zip the word-separators and the words together, decode the
