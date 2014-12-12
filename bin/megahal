@@ -16,7 +16,6 @@ say("<%= color('" + <<-EOS + "', BOLD) %>")
 |                                                          |
 |    Type "/help" for options and "/quit" to terminate.    |
 +----------------------------------------------------------+
-
 EOS
 
 class MegaLog
