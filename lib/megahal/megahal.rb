@@ -83,6 +83,7 @@ class MegaHAL
     utterances << _generate([])
     9.times { utterances << _generate(keyword_symbols) }
     utterances.delete_if { |utterance| utterance == input_symbols }
+    utterances.compact!
 
     # learn from what the user said _after_ generating the reply
     _learn(puncs, norms, words) if @learning && norms
