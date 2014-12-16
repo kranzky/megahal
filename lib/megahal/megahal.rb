@@ -71,8 +71,6 @@ class MegaHAL
   def reply(input, error="...")
     puncs, norms, words = _decompose(input ? input.strip : nil)
 
-    _learn(puncs, norms, words) if @learning && norms
-
     keyword_symbols =
       MegaHAL.extract(norms)
           .map { |keyword| @dictionary[keyword] }
@@ -80,24 +78,19 @@ class MegaHAL
 
     input_symbols = (norms || []).map { |norm| @dictionary[norm] }
 
-    # TODO: generate one random utterance without using a keyword
-    # TODO: maintain a list of utterance-score pairings
-    # TODO: calculate score using auxilliary keywords too
-    # TODO: sort by descending score and rewrite until success
-    100.times do
-      if norm_symbols = _generate(keyword_symbols)
-        next if norm_symbols == input_symbols
-        if reply = _rewrite(norm_symbols)
-          return reply
-        end
-      end
-    end
+    # create up to 100 candidate utterances
+    utterances = []
+    utterances << _generate([])
+    99.times { utterances << _generate(keyword_symbols) }
+    utterances.delete_if { |utterance| utterance == input_symbols }
 
-    if norm_symbols = _generate([])
-      if norm_symbols != input_symbols
-        if reply = _rewrite(norm_symbols)
-          return reply
-        end
+    # learn from what the user said _after_ generating the reply
+    _learn(puncs, norms, words) if @learning && norms
+
+    # select the best utterance
+    if utterance = _select_utterance(utterances, keyword_symbols)
+      if reply = _rewrite(utterance)
+        return reply
       end
     end
 
@@ -323,6 +316,57 @@ class MegaHAL
       context.shift
     end
     results
+  end
+
+  # Given an array of utterances and an array of keywords, select the best
+  # utterance (returning nil for none at all).
+  def _select_utterance(utterances, keyword_symbols)
+    best_score = -1
+    best_utterance = nil
+
+    utterances.each do |utterance|
+      score = _calculate_score(utterance, keyword_symbols)
+      next unless score > best_score
+      best_score = score
+      best_utterance = utterance
+    end
+
+    return best_utterance
+  end
+
+  # Calculate the score of a particular utterance
+  def _calculate_score(utterance, keyword_symbols)
+    score = 0
+
+    context = [1, 1]
+    utterance.each do |norm|
+      if keyword_symbols.include?(norm)
+        surprise = @fore.surprise(context, norm)
+        score += surprise unless surprise.nil?
+      end
+      context << norm
+      context.shift
+    end
+
+    context = [1, 1]
+    utterance.reverse.each do |norm|
+      if keyword_symbols.include?(norm)
+        surprise = @back.surprise(context, norm)
+        score += surprise unless surprise.nil?
+      end
+      context << norm
+      context.shift
+    end
+
+    if utterance.length >= 8
+      score /= Math.sqrt(utterance.length - 1)
+    end
+
+    if utterance.length >= 16
+      score /= utterance.length
+    end
+
+    score
   end
 
   # Here we take a generated sequence of norms and convert them back to a string
