@@ -81,7 +81,7 @@ class MegaHAL
     # create up to 100 candidate utterances
     utterances = []
     utterances << _generate([])
-    99.times { utterances << _generate(keyword_symbols) }
+    9.times { utterances << _generate(keyword_symbols) }
     utterances.delete_if { |utterance| utterance == input_symbols }
 
     # learn from what the user said _after_ generating the reply
@@ -301,7 +301,7 @@ class MegaHAL
     local_keywords = keyword_symbols.dup
     loop do
       symbol = 0
-      100.times do
+      10.times do
         limit = rand(model.count(context)) + 1
         symbol = model.select(context, limit)
         if local_keywords.include?(symbol)
