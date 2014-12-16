@@ -260,10 +260,11 @@ class MegaHAL
   end
 
   # Given an array of keyword symbols, generate an array of norms that hopefully
-  # contain at least one of the keywords
+  # contain at least one of the keywords. All the symbols given as keywords must
+  # have been observed in the past, othewise this will raise an exception.
   def _generate(keyword_symbols)
     results = 
-      if keyword = keyword_symbols.shuffle.first
+      if keyword = _select_keyword(keyword_symbols)
         # Use the @seed model to find two contexts that contain the keyword.
         contexts = [[2, keyword], [keyword, 2]]
         contexts.map! do |context|
@@ -282,24 +283,39 @@ class MegaHAL
         # Here we glue the generations of the @back and @fore models together
         decode = Hash[@dictionary.to_a.map(&:reverse)]
         glue = context.select { |symbol| symbol != 1 }
-        _random_walk(@back, context.reverse).reverse + glue + _random_walk(@fore, context)
+        _random_walk(@back, context.reverse, keyword_symbols).reverse + glue + _random_walk(@fore, context, keyword_symbols)
       else
+        # we weren't given any keywords, so do a normal markovian generation
         context = [1, 1]
-        _random_walk(@fore, context)
+        _random_walk(@fore, context, keyword_symbols)
       end
     results.length == 0 ? nil : results
   end
 
+  # Remove auxilliary words and select at random from what remains
+  def _select_keyword(keyword_symbols)
+    (keyword_symbols - AUXILIARY.map { |word| @dictionary[word] }).shuffle.first
+  end
+
   # This is classic Markovian generation; using a model, start with a context
-  # and continue until we hit a <fence> symbol.
-  def _random_walk(model, static_context)
-    # TODO: favour keywords when generating
+  # and continue until we hit a <fence> symbol. The only addition here is that
+  # we roll the dice several times, and prefer generations that elicit a
+  # keyword.
+  def _random_walk(model, static_context, keyword_symbols)
     context = static_context.dup
     results = []
     return [] if model.count(context) == 0
+    local_keywords = keyword_symbols.dup
     loop do
-      limit = rand(model.count(context)) + 1
-      symbol = model.select(context, limit)
+      symbol = 0
+      100.times do
+        limit = rand(model.count(context)) + 1
+        symbol = model.select(context, limit)
+        if local_keywords.include?(symbol)
+          local_keywords.delete(symbol)
+          break
+        end
+      end
       raise if symbol == 0
       break if symbol == 1
       results << symbol

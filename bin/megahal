@@ -110,7 +110,7 @@ def help_menu(megahal, log)
         log.status('use words instead of characters')
       end
     else
-      menu.choice(:characters) do
+      menu.choice(:chars) do
         megahal.characters = true
         log.status('use characters instead of words')
       end

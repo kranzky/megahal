@@ -5,7 +5,20 @@ class MegaHAL
   # would be better if keywords were learned by observing question-answer pairs.
   def self.extract(words)
     return GREETING if words.nil?
-    (words - BANNED).map { |word| SWAP[word] || word }
+    words
+      .map do |word|
+        if word =~ /^[0-9]/
+          nil
+        elsif BANNED.include?(word)
+          nil
+        elsif SWAP.key?(word)
+           SWAP[word]
+        else
+          word
+        end
+      end
+      .compact
+      .uniq
   end
 
   GREETING = ["G'DAY", "GREETINGS", "HELLO", "HI", "HOWDY", "WELCOME"]
@@ -38,6 +51,37 @@ class MegaHAL
     ["YOURSELF", "MYSELF"],
   ]
   SWAP = Hash[ANTONYMS + ANTONYMS.map(&:reverse)]
+
+  AUXILIARY = <<-EOS.each_line.to_a.map(&:strip)
+    DISLIKE
+    HE
+    HER
+    HERS
+    HIM
+    HIS
+    I
+    I'D
+    I'LL
+    I'M
+    I'VE
+    LIKE
+    ME
+    MINE
+    MY
+    MYSELF
+    ONE
+    SHE
+    THREE
+    TWO
+    YOU
+    YOU'D
+    YOU'LL
+    YOU'RE
+    YOU'VE
+    YOUR
+    YOURS
+    YOURSELF
+  EOS
 
   BANNED = <<-EOS.each_line.to_a.map(&:strip)
     A
