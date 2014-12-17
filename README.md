@@ -16,60 +16,11 @@ It is built on top of [Sooth](https://github.com/jasonhutchens/sooth), a simple
 stochastic predictive model.
 
 This new version of MegaHAL was written in homage of the original, which I wrote
-around twenty years ago. As these things go, the Ruby version is about 10% of
-the size of the original C version.
+around twenty years ago. As these things go, the Ruby version is a fraction of
+the size of the [original C version](https://github.com/pteichman/megahal/blob/master/Megahal/megahal.c).
 
-The oldest record I have of MegaHAL is the following USENET announcement from
-April 30, 1995.
-
-Have a weird conversation with a computer
------------------------------------------
-
-Recently I added a feature to my home page allowing the user to "talk" to a
-computer program of mine.  The program was not written very intelligently, so
-most of the time its replies consisted of incoherent babble.
-
-Version 2 came and went, and now version 3 - MegaHAL - is ready for release.
-The new features of the program are:-
-
-* A second-order markov model is used, and it is doubly-linked.  This
-  means that the computers sentences tend to be more grammatical.
-* Punctuation is supported, which segments the sentences realistically.
-* The reply given by the computer is based upon one of the words in
-  the input string.  The word selected is one that maximises the ratio
-  (number of times since word was last used)/(number of times word has
-  appeared).
-* The computers reply is generated from this keyword, and may be up to
-  100 words long.  The reply is generated in such a way that it is
-  impossible to get stuck in infinite loops.
-* The keyword used is highlighted in the reply.
-
-Some example conversations are given below:-
-
-```
-USER: you are crazy
-HAL:  WE *ARE* WEIRD.
-
-USER: What is the meaning of life oh wise one?
-HAL:  *LIFE* IS THE ROOM.
-
-USER: this is not getting us very far
-HAL:  YES I AM *GETTING* BORED OF GLOBAL DOMINATION.
-
-USER: I have no idea.
-HAL:  *NO* IT IS IN HEAVEN.
-USER: Is it really?
-HAL:  YES *IT* IS.
-
-USER: My name is Jason.
-HAL:  I THINK ALAN TURING WAS A GIRLIE, JUST LIKE *MY* DEAR MAMA
-```
-
-The last response was generated from a combination of a discussion
-about Alan Turing, and Monty Python's Lumberjack Song.  Surely this
-must be a sign of intelligence ;^)
-
-Have fun!
+The oldest record I have of MegaHAL is a USENET post from April 30, 1995,
+which is reproduced at the bottom of this README.
 
 Getting Started
 ---------------
@@ -104,9 +55,8 @@ If you type `/help` at the prompt, you'll be presented with a menu:
 4. train
 5. load
 6. save
-7. characters
-8. ignore
-9. quit
+7. ignore
+8. quit
 ```
 
 Make a selection by typing the number or the name of the menu item:
@@ -117,8 +67,8 @@ Make a selection by typing the number or the name of the menu item:
 1. `train`: give MegaHAL a plain text file to learn from
 1. `load`: load a previously saved brain from a file
 1. `save`: save the current MegaHAL brain to a file
-1. `chars`: make MegaHAL use characters instead of words; this may be better for some languages (such as Chinese)
 1. `ignore`: prevent MegaHAL from learning from user input; this is good if you want to chat without introducing changes to the brain
+1. `quit`: immediately exit MegaHAL, losing any unsaved changes
 
 If you select the `brain` menu item above, you'll be presented with a list of
 pre-existing MegaHAL brains to choose from:
@@ -136,7 +86,7 @@ pre-existing MegaHAL brains to choose from:
 Example
 -------
 
-Here is an example conversation transcript:
+Here is an example conversation transcript, taken directly from the `megahal.log` file (which is written each time you interact with MegaHAL):
 
 ```
 (brain changed to sherlock holmes)
@@ -176,6 +126,58 @@ MH10: No crime, but a very interesting statement.
 USER: Goodbye.
 MH10: You must get home instantly and act.
 MegaHAL Stopped
+```
+
+USENET Announcement from 1995
+-----------------------------
+
+```
+Have a weird conversation with a computer
+-----------------------------------------
+
+Recently I added a feature to my home page allowing the user to "talk" to a
+computer program of mine.  The program was not written very intelligently, so
+most of the time its replies consisted of incoherent babble.
+
+Version 2 came and went, and now version 3 - MegaHAL - is ready for release.
+The new features of the program are:-
+
+* A second-order markov model is used, and it is doubly-linked.  This
+  means that the computers sentences tend to be more grammatical.
+* Punctuation is supported, which segments the sentences realistically.
+* The reply given by the computer is based upon one of the words in
+  the input string.  The word selected is one that maximises the ratio
+  (number of times since word was last used)/(number of times word has
+  appeared).
+* The computers reply is generated from this keyword, and may be up to
+  100 words long.  The reply is generated in such a way that it is
+  impossible to get stuck in infinite loops.
+* The keyword used is highlighted in the reply.
+
+Some example conversations are given below:-
+
+USER: you are crazy
+HAL:  WE *ARE* WEIRD.
+
+USER: What is the meaning of life oh wise one?
+HAL:  *LIFE* IS THE ROOM.
+
+USER: this is not getting us very far
+HAL:  YES I AM *GETTING* BORED OF GLOBAL DOMINATION.
+
+USER: I have no idea.
+HAL:  *NO* IT IS IN HEAVEN.
+USER: Is it really?
+HAL:  YES *IT* IS.
+
+USER: My name is Jason.
+HAL:  I THINK ALAN TURING WAS A GIRLIE, JUST LIKE *MY* DEAR MAMA
+
+The last response was generated from a combination of a discussion
+about Alan Turing, and Monty Python's Lumberjack Song.  Surely this
+must be a sign of intelligence ;^)
+
+Have fun!
 ```
 
 Copyright
