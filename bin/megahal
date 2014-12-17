@@ -118,6 +118,7 @@ def help_menu(megahal, log)
           megahal.train(filename, bar)
           bar.finish
           log.status("training succesfull for '#{filename}'")
+          log.puts(megahal.reply(nil))
         rescue => e
           log.error(e.message)
         end
@@ -134,6 +135,7 @@ def help_menu(megahal, log)
           megahal.load(filename, bar)
           bar.finish
           log.status("loading succesfull for '#{filename}'")
+          log.puts(megahal.reply(nil))
         rescue => e
           log.error(e.message)
         end

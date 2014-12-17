@@ -81,24 +81,25 @@ class MegaHAL
 
     input_symbols = (norms || []).map { |norm| @dictionary[norm] }
 
-    # create up to 100 candidate utterances
+    # create candidate utterances
     utterances = []
-    utterances << _generate([])
     9.times { utterances << _generate(keyword_symbols) }
+    utterances << _generate([])
     utterances.delete_if { |utterance| utterance == input_symbols }
     utterances.compact!
+
+    # select the best utterance, and handle _rewrite failure
+    reply = nil
+    while reply.nil? && utterances.length > 0
+      break unless utterance = _select_utterance(utterances, keyword_symbols)
+      reply = _rewrite(utterance)
+      utterances.delete(utterance)
+    end
 
     # learn from what the user said _after_ generating the reply
     _learn(puncs, norms, words) if @learning && norms
 
-    # select the best utterance
-    if utterance = _select_utterance(utterances, keyword_symbols)
-      if reply = _rewrite(utterance)
-        return reply
-      end
-    end
-
-    return error
+    return reply || error
   end
 
   # Save MegaHAL's brain to the specified binary file.
@@ -306,7 +307,6 @@ class MegaHAL
         context = contexts.compact.shuffle.first
         raise unless context
         # Here we glue the generations of the @back and @fore models together
-        decode = Hash[@dictionary.to_a.map(&:reverse)]
         glue = context.select { |symbol| symbol != 1 }
         _random_walk(@back, context.reverse, keyword_symbols).reverse + glue + _random_walk(@fore, context, keyword_symbols)
       else
