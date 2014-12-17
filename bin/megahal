@@ -2,8 +2,8 @@
 
 require 'megahal'
 require 'highline/import'
-require 'hodel_3000_compliant_logger'
 require 'ruby-progressbar'
+require 'logger'
 
 say("<%= color('" + <<-EOS + "', BOLD) %>")
 +----------------------------------------------------------+
@@ -21,11 +21,12 @@ EOS
 
 class MegaLog
   def initialize
-    @logger = Hodel3000CompliantLogger.new("megahal.log")
-    @logger.info "MegaHAL Started"
+    @logger = Logger.new("megahal.log")
+    @logger.formatter = proc { |_, _, _, msg| msg + "\n" }
+    @logger.info "MegaHALv10\nStart at: [#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}]"
   end
   def exit
-    @logger.info "MegaHAL Stopped"
+    @logger.info "Stop at: [#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}]"
   end
   def error(message)
     @logger.error "(#{message})"
