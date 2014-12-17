@@ -116,12 +116,12 @@ class MegaHAL
           dictionary: @dictionary
         }.to_json)
       end
-      bar.increment
+      bar.increment unless bar.nil?
       [:seed, :fore, :back, :case, :punc].each do |name|
         tmp = _get_tmp_filename(name)
         instance_variable_get("@#{name}").save(tmp)
         zipfile.add(name, tmp)
-        bar.increment
+        bar.increment unless bar.nil?
       end
     end
   end
@@ -137,12 +137,12 @@ class MegaHAL
       raise "bad version" unless data['version'] == "MH10"
       @learning = data['learning']
       @dictionary = data['dictionary']
-      bar.increment
+      bar.increment unless bar.nil?
       [:seed, :fore, :back, :case, :punc].each do |name|
         tmp = _get_tmp_filename(name)
         zipfile.find_entry(name.to_s).extract(tmp)      
         instance_variable_get("@#{name}").load(tmp)
-        bar.increment
+        bar.increment unless bar.nil?
       end
     end
   end
