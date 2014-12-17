@@ -362,20 +362,14 @@ Read it up--you really should. There is nothing new under the sun. It has all be
 There is nothing more to be learned.
 I have just made a discovery of the highest importance.
 What do you think of that?
-They say that genius is an infinite capacity for taking pains. It's a very bad
-definition, but it does apply to detective work.
+They say that genius is an infinite capacity for taking pains. It's a very bad definition, but it does apply to detective work.
 You are doing so well now that it would be a pity for anyone to interfere.
 There is nothing like first hand evidence.
 There's no room for a mistake.
 Just let us hear it all in your own way as it occurred.
-Do you remember what Darwin says about music? He claims that the power of
-producing and appreciating it existed among the human race long before the power
-of speech was arrived at. Perhaps that is why we are so subtly influenced by it.
-There are vague memories in our souls of those misty centuries when the world
-was in its childhood.
+Do you remember what Darwin says about music? He claims that the power of producing and appreciating it existed among the human race long before the power of speech was arrived at. Perhaps that is why we are so subtly influenced by it. There are vague memories in our souls of those misty centuries when the world was in its childhood.
 One's ideas must be as broad as Nature if they are to interpret Nature.
-I can understand. There is a mystery about this which stimulates the
-imagination; where there is no imagination there is no horror.
+I can understand. There is a mystery about this which stimulates the imagination; where there is no imagination there is no horror.
 The plot thickens.
 My fiddle would be the better for new strings.
 You do me too much honour.
