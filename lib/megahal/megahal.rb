@@ -1,15 +1,15 @@
+require 'cld'
 require 'sooth'
 require 'tempfile'
 require 'json'
 require 'zip'
 
 class MegaHAL
-  attr_accessor :characters, :learning
+  attr_accessor :learning
 
   # Create a new MegaHAL instance, loading the :default personality.
   def initialize
     @learning = true
-    @characters = false
     @seed = Sooth::Predictor.new(0)
     @fore = Sooth::Predictor.new(0)
     @back = Sooth::Predictor.new(0)
@@ -113,7 +113,6 @@ class MegaHAL
         file.write({
           version: 'MH10',
           learning: @learning,
-          characters: @characters,
           dictionary: @dictionary
         }.to_json)
       end
@@ -137,7 +136,6 @@ class MegaHAL
       data = JSON.parse(zipfile.find_entry("dictionary").get_input_stream.read)
       raise "bad version" unless data['version'] == "MH10"
       @learning = data['learning']
-      @characters = data['characters']
       @dictionary = data['dictionary']
       bar.increment
       [:seed, :fore, :back, :case, :punc].each do |name|
@@ -265,7 +263,7 @@ class MegaHAL
   def _segment(line)
     # split the sentence into an array of alternating words and word-separators
     sequence =
-      if @characters
+      if _character_segmentation(line)
         line.split(/([[:word:]])/)
       else
         line.split(/([[:word:]]+)/)
@@ -475,5 +473,10 @@ class MegaHAL
     file.close
     file.unlink
     return retval
+  end
+
+  def _character_segmentation(line)
+    language = CLD.detect_language(line)[:name]
+    ["Japanese", "Korean", "Chinese", "TG_UNKNOWN_LANGUAGE", "Unknown", "JAVANESE", "THAI", "ChineseT", "LAOTHIAN", "BURMESE", "KHMER", "XX"].include?(language)
   end
 end

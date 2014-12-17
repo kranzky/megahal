@@ -5,6 +5,7 @@ gem 'highline', '~> 1.6'
 gem 'hodel_3000_compliant_logger', '~> 0.1'
 gem 'ruby-progressbar', '~> 1.7.0'
 gem 'rubyzip', '~> 1.1.6'
+gem 'cld', '~> 0.7.0'
 
 group :development do
   gem 'rspec', '~> 3.1'

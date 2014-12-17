@@ -157,17 +157,6 @@ def help_menu(megahal, log)
         end
       end
     end
-    if megahal.characters
-      menu.choice(:words) do
-        megahal.characters = false
-        log.status('use words instead of characters')
-      end
-    else
-      menu.choice(:chars) do
-        megahal.characters = true
-        log.status('use characters instead of words')
-      end
-    end
     if megahal.learning
       menu.choice(:ignore) do
         megahal.learning = false

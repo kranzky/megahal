@@ -7,6 +7,8 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    cld (0.7.0)
+      ffi
     columnize (0.9.0)
     debugger-linecache (1.2.0)
     descendants_tracker (0.0.4)
@@ -15,6 +17,7 @@ GEM
     docile (1.1.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.6)
     git (1.2.8)
     github_api (0.12.2)
       addressable (~> 2.3)
@@ -84,6 +87,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.7)
   byebug (~> 3.5)
+  cld (~> 0.7.0)
   highline (~> 1.6)
   hodel_3000_compliant_logger (~> 0.1)
   jeweler (~> 2.0)
