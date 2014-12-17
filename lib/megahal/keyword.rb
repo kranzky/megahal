@@ -21,7 +21,7 @@ class MegaHAL
       .uniq
   end
 
-  GREETING = ["G'DAY", "GREETINGS", "HELLO", "HI", "HOWDY", "WELCOME"]
+  GREETING = ["G'DAY", "GREETINGS", "HELLO", "HULLO", "HI", "HOWDY", "WELCOME"]
 
   ANTONYMS = [
     ["DISLIKE", "LIKE"],
@@ -49,6 +49,19 @@ class MegaHAL
     ["YOUR", "MY"],
     ["YOURS", "MINE"],
     ["YOURSELF", "MYSELF"],
+    ["HOLMES", "WATSON"],
+    ["FRIEND", "ENEMY"],
+    ["ALIVE", "DEAD"],
+    ["QUESTION", "ANSWER"],
+    ["BLACK", "WHITE"],
+    ["COLD", "HOT"],
+    ["HAPPY", "SAD"],
+    ["FALSE", "TRUE"],
+    ["HEAVEN", "HELL"],
+    ["GOD", "DEVIL"],
+    ["NOISY", "QUIET"],
+    ["WAR", "PEACE"],
+    ["SORRY", "APOLOGY"]
   ]
   SWAP = Hash[ANTONYMS + ANTONYMS.map(&:reverse)]
 
