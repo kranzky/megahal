@@ -268,7 +268,7 @@ class MegaHAL
       else
         line.split(/([[:word:]]+)/)
       end
-    # ensure the array starts with and ends with a word-separator, even if it's the blank onw
+    # ensure the array starts with and ends with a word-separator, even if it's the blank one
     sequence << "" if sequence.last =~ /[[:word:]]+/
     sequence.unshift("") if sequence.first =~ /[[:word:]]+/
     # join trigrams of word-separator-word if the separator is a single ' or -
@@ -467,6 +467,8 @@ class MegaHAL
     punc_symbols.zip(word_symbols).flatten.map { |word| decode[word] }.join
   end
 
+  # this is used when saving and loading; we do this by creating and immediately
+  # removing a temporary file, then returning it's path (yech)
   def _get_tmp_filename(name)
     file = Tempfile.new(name.to_s)
     retval = file.path
@@ -475,6 +477,10 @@ class MegaHAL
     return retval
   end
 
+  # by default the user's input is segmented into words; for languages that
+  # don't use whitespace to delimit words, MegaHAL falls back to segmenting the
+  # users input into "characters"... to do this we need to guess which language
+  # the user's input is in with magic
   def _character_segmentation(line)
     language = CLD.detect_language(line)[:name]
     ["Japanese", "Korean", "Chinese", "TG_UNKNOWN_LANGUAGE", "Unknown", "JAVANESE", "THAI", "ChineseT", "LAOTHIAN", "BURMESE", "KHMER", "XX"].include?(language)
