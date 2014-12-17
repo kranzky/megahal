@@ -12,3 +12,5 @@ pkg
 .ditz-config
 tmp
 megahal.log
+TODO.txt
+lib/megahal/personalities/sherlock.txt
