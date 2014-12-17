@@ -3,6 +3,7 @@
 require 'megahal'
 require 'highline/import'
 require 'hodel_3000_compliant_logger'
+require 'ruby-progressbar'
 
 say("<%= color('" + <<-EOS + "', BOLD) %>")
 +----------------------------------------------------------+
@@ -25,6 +26,11 @@ class MegaLog
   end
   def exit
     @logger.info "MegaHAL Stopped"
+  end
+  def error(message)
+    @logger.error "(#{message})"
+    message = HighLine.color("(#{message})", :dark, :red)
+    say(message)
   end
   def status(message)
     @logger.info "(#{message})"
@@ -101,9 +107,54 @@ def help_menu(megahal, log)
       log.status('show brain menu')
       list_menu(megahal, log)
     end
-    menu.choice(:train) {}
-    menu.choice(:load) {}
-    menu.choice(:save) {}
+    menu.choice(:train) do
+      log.status('train on a text file')
+      filename = ask("Filename: ")
+      unless File.exists?(filename)
+        log.error("no such file")
+      else
+        begin
+          bar = ProgressBar.create(title: "Training", total: nil)
+          megahal.train(filename, bar)
+          bar.finish
+          log.status("training succesfull for '#{filename}'")
+        rescue => e
+          log.error(e.message)
+        end
+      end
+    end
+    menu.choice(:load) do
+      log.status('load a brain file')
+      filename = ask("Filename: ")
+      unless File.exists?(filename)
+        log.error("no such file")
+      else
+        begin
+          bar = ProgressBar.create(title: "Loading", total: nil)
+          megahal.load(filename, bar)
+          bar.finish
+          log.status("loading succesfull for '#{filename}'")
+        rescue => e
+          log.error(e.message)
+        end
+      end
+    end
+    menu.choice(:save) do
+      log.status('save a brain file')
+      filename = ask("Filename: ")
+      if File.exists?(filename)
+        log.error("file already exists")
+      else
+        begin
+          bar = ProgressBar.create(title: "Saving", total: nil)
+          megahal.save(filename, bar)
+          bar.finish
+          log.status("saving succesfull for '#{filename}'")
+        rescue => e
+          log.error(e.message)
+        end
+      end
+    end
     if megahal.characters
       menu.choice(:words) do
         megahal.characters = false

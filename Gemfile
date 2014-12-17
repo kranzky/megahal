@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'sooth', '~> 0.5'
 gem 'highline', '~> 1.6'
 gem 'hodel_3000_compliant_logger', '~> 0.1'
+gem 'ruby-progressbar', '~> 1.7.0'
+gem 'rubyzip', '~> 1.1.6'
 
 group :development do
   gem 'rspec', '~> 3.1'

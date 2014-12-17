@@ -1,4 +1,7 @@
 require 'sooth'
+require 'tempfile'
+require 'json'
+require 'zip'
 
 class MegaHAL
   attr_accessor :characters, :learning
@@ -101,26 +104,48 @@ class MegaHAL
   # Save MegaHAL's brain to the specified binary file.
   #
   # @param [String] filename The brain file to be saved.
-  def save(filename)
-    # TODO: save dictionary and five models to a zip file
-    #       - create working directory in tmp
-    #       - save dictionary there with marshal
-    #       - save five models there
-    #       - zip it up
-    #       - remove working directory
-    raise
+  # @param [ProgressBar] bar An optional progress bar instance.
+  def save(filename, bar = nil)
+    bar.total = 6 unless bar.nil?
+    Zip::File.open(filename, Zip::File::CREATE) do |zipfile|
+      zipfile.get_output_stream("dictionary") do |file|
+        file.write({
+          version: 'MH10',
+          learning: @learning,
+          characters: @characters,
+          dictionary: @dictionary
+        }.to_json)
+      end
+      bar.increment
+      [:seed, :fore, :back, :case, :punc].each do |name|
+        tmp = _get_tmp_filename(name)
+        instance_variable_get("@#{name}").save(tmp)
+        zipfile.add(name, tmp)
+        bar.increment
+      end
+    end
   end
 
   # Load a brain that has previously been saved.
   #
   # @param [String] filename The brain file to be loaded.
-  def load(filename)
-    # TODO: load dictionary and five models from a zip file
-    #       - extract to working directory in tmp
-    #       - load dictionary
-    #       - load five models
-    #       - remove working directory
-    raise
+  # @param [ProgressBar] bar An optional progress bar instance.
+  def load(filename, bar = nil)
+    bar.total = 6 unless bar.nil?
+    Zip::File.open(filename) do |zipfile|
+      data = JSON.parse(zipfile.find_entry("dictionary").get_input_stream.read)
+      raise "bad version" unless data['version'] == "MH10"
+      @learning = data['learning']
+      @characters = data['characters']
+      @dictionary = data['dictionary']
+      bar.increment
+      [:seed, :fore, :back, :case, :punc].each do |name|
+        tmp = _get_tmp_filename(name)
+        zipfile.find_entry(name.to_s).extract(tmp)      
+        instance_variable_get("@#{name}").load(tmp)
+        bar.increment
+      end
+    end
   end
 
   # Train MegaHAL with the contents of the specified file, which should be plain
@@ -129,15 +154,21 @@ class MegaHAL
   # block for a while. Lines that are too long will be skipped.
   #
   # @param [String] filename The text file to be used for training.
-  def train(filename)
-    _train(File.read(filename).each_line.to_a)
+  # @param [ProgressBar] bar An optional progress bar instance.
+  def train(filename, bar = nil)
+    lines = File.read(filename).each_line.to_a
+    bar.total = lines.length unless bar.nil?
+    _train(lines, bar)
   end
 
   private
 
-  def _train(data)
+  def _train(data, bar = nil)
     data.map!(&:strip)
-    data.each { |line| _learn(*_decompose(line)) }
+    data.each do |line|
+      _learn(*_decompose(line))
+      bar.increment unless bar.nil?
+    end
     nil
   end
 
@@ -436,5 +467,13 @@ class MegaHAL
     # symbols to their string representations (as stored in the @dictionary),
     # and join everything together to give the final reply.
     punc_symbols.zip(word_symbols).flatten.map { |word| decode[word] }.join
+  end
+
+  def _get_tmp_filename(name)
+    file = Tempfile.new(name.to_s)
+    retval = file.path
+    file.close
+    file.unlink
+    return retval
   end
 end
