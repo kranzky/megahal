@@ -4,7 +4,7 @@ Indeed, I should have thought a little more. Just a trifle more, I fancy, Watson
 I see it, I deduce it.
 It is simplicity itself.
 Quite so.
-You see, but you do not observe.  The distinction is clear.
+You see, but you do not observe. The distinction is clear.
 How often?
 Quite so! You have not observed. And yet you have seen. That is just my point.
 I have no data yet. It is a capital mistake to theorize before one has data. Insensibly one begins to twist facts to suit theories, instead of theories to suit facts.
@@ -196,7 +196,7 @@ Have you seen the morning paper, Watson?
 We must plan what we are to do about Moriarty now.
 Isn't it gorgeous! What do you think of it?
 No, it's not quite so bad as that.
-I confess that I am surprised and disappointed.  I expected something definite by this time.
+I confess that I am surprised and disappointed. I expected something definite by this time.
 You can do what you will, but I must remain on guard.
 I am very anxious that I should use the knowledge which I possess in order to insure that justice be done.
 Will you associate me in your investigation, or will you prefer that I should act independently?
@@ -251,4 +251,134 @@ But we have learned a good deal, you perceive.
 So now, my dear fellow, you see exactly how we stand and why it is I want you.
 You may be sure that I took some precautions.
 That's what I want to ascertain.
+He is such an inscrutable fellow that I never quite know what to make of him.
+Do you think he is hopeful?
+Do you think he expects to make a success of it?
+It has been a most remarkable experience.
+Before the what?
+Indeed. This is more interesting than it promised to be; quite dramatic, in fact.
+And is that all?
+And an exceedingly interesting case it appears to be. I would not have missed it for worlds.
+Well, it is a possible supposition.
+But you do not yourself look upon this as likely?
+I have solved it.
+I have notes of several similar cases, though none, as I remarked before, which were quite as prompt.
+It is the purest accident. I cannot allow that there is any humiliation.
+Ah, you look on these things from another standpoint.
+I see that you have had some great trouble.
+Pray compose yourself, sir, and let me have a clear account of who you are and what it is that has befallen you.
+On the contrary, your statement is singularly lucid.
+I hardly consider that a conclusive proof.
+A likely story!
+It is our task to find that out.
+Thank you. We have certainly been favoured with extraordinary luck during this inquiry, and it will be entirely our own fault if we do not succeed in clearing the matter up.
+I cannot tell.
+If you can call upon me at my Baker Street rooms to-morrow morning between nine and ten I shall be happy to do what I can to make it clearer.
+Very good. I shall look into the matter between this and then.
+Good-bye; it is just possible that I may have to come over here again before evening.
+No, no, nothing of the kind. It is perhaps the best possible solution.
+It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth.
+Pshaw, my dear fellow, what do the public, the great unobservant public, who could hardly tell a weaver by his tooth or a compositor by his left thumb, care about the finer shades of analysis and deduction!
+But, indeed, if you are trivial. I cannot blame you, for the days of the great cases are past.
+Man, or at least criminal man, has lost all enterprise and originality.
+As to my own little practice, it seems to be degenerating into an agency for recovering lost lead pencils and giving advice to young ladies from boarding-schools.
+It may turn out to be of more interest than you think.
+Ah, I have no data. I cannot tell. Perhaps you have yourself formed some opinion?
+It is one of the curses of a mind with a turn like mine that I must look at everything with reference to my own special subject.
+I have devised seven separate explanations, each of which would cover the facts as far as we know them.
+I am glad of all details, whether they seem to you to be relevant or not.
+Pray continue. Your narrative promises to be a most interesting one.
+I have frequently gained my first real insight into the character of parents by studying their children.
+We must be circumspect, for we are dealing with a very cunning man.
+You have done well indeed!
+This great and sombre stage is set for something more worthy than that.
+Well, well! What next?
+I thought I might surprise you.
+Dear me, Watson, this is really very singular.
+I play the game for the game's own sake.
+Some more facts, please.
+Then we must take that as our working hypothesis.
+Your theory holds together. But if this is true, then the case is at an end.
+An idea--an indication, no more. But the case certainly grows in interest. Unique, perfectly unique, and yet why not?
+There is material here. There is scope. I am dull indeed not to have understood its possibilities.
+Even now they are dark to me.
+The end is dark to me also, but I have hold of one idea which may lead us far.
+Exactly. This would explain it. Everything fits together.
+Good heavens!
+This is indeed an unexpected development.
+I do not recall any other question which I desired to ask.
+They may mean something or nothing.
+I am not aware that in all our joint researches we have ever had a case which was more difficult to get at.
+Every fresh advance which we make only reveals a fresh ridge beyond. And yet we have surely made some appreciable progress.
+Then we come into difficulties.
+I'm afraid that all the queen's horses and all the queen's men cannot avail in this matter.
+Well, well, things are turning a little in our direction at last.
+I should say it was impossible.
+That was the question which we had to answer. There is only one possible way.
+We must fall back upon the old axiom that when all other contingencies fail, whatever remains, however improbable, must be the truth.
+Yes, that was it.
+So far--so far, Watson. We advance, but the goal is afar.
+Hardly on the evidence.
+I knew you would not shrink at the last.
+This is a serious proposition.
+Give me a hand, Watson, and I'll do the same for you.
+Halloa, Watson! What is this?
+So far we are justified. What do you think of it, Watson?
+I cannot agree with you there.
+Our difficulties are still before us.
+What's this, Watson? Eh? What's this?
+Well, perhaps it won't be so difficult, after all. There is nothing more to be done here, Watson.
+For England, home and beauty--eh, Watson? Martyrs on the altar of our country.
+You can write me down an ass this time, Watson. This was not the bird that I was looking for.
+How an English gentleman could behave in such a manner is beyond my comprehension.
+I can assure you that every essential is already known.
+Tell me about last night.
+The facts, as you state them, are certainly most remarkable. I take it that you have no theory yourself which can in any way account for them?
+I fear that if the matter is beyond humanity it is certainly beyond me. Yet we must exhaust all natural explanations before we fall back upon such a theory as this.
+You have nothing to add then, which could assist me?
+Remarkable--most remarkable!
+And yet, with a little more material, we may prove that they are not insurmountable.
+I may say in answer to your original question that I have not cleared my mind entirely on the subject of this case, but that I have every hope of reaching some conclusion.
+It would be premature to say more.
+No, I can hardly answer that.
+There is a thread here which we had not yet grasped and which might lead us through the tangle.
+At least we may accept it as a working hypothesis.
+It is not for me, my dear Watson, to stand in the way of the official police force.
+Upon my word, Watson! I owe you both my thanks and an apology.
+I am really very sorry.
+Well, Watson, it is on the face of it a not impossible supposition.
+Meanwhile, I am much obliged to you for your courteous acquiescence.
+I will tell you, and the reason why I tell you is that I hope frankness may beget frankness.
+What my next step may be will depend entirely upon the nature of your own defence.
+I have heard your reasons and regard them as unconvincing and inadequate.
+That is why I have done it.
+It is no reflection upon your professional knowledge.
+Well, Watson, I will not offend your intelligence by explaining what is obvious.
+Whatever have you been doing with yourself, Watson?
+Poor devil!
+That's a strange thing, you are the second man to-day that has used that expression to me.
+You see, I consider that a man's brain originally is like a little empty attic, and you have to stock it with such furniture as you choose. A fool takes in all the lumber of every sort that he comes across, so that the knowledge which might be useful to him gets crowded out, or at best is jumbled up with a lot of other things so that he has a difficulty in laying his hands upon it. Now the skilful workman is very careful indeed as to what he takes into his brain-attic. He will have nothing but the tools which may help him in doing his work, but of these he has a large assortment, and all in the most perfect order. It is a mistake to think that that little room has elastic walls and can distend to any extent. Depend upon it there comes a time when for every addition of knowledge you forget something that you knew before. It is of the highest importance, therefore, not to have useless facts elbowing out the useful ones.
+Read it up--you really should. There is nothing new under the sun. It has all been done before.
+There is nothing more to be learned.
+I have just made a discovery of the highest importance.
+What do you think of that?
+They say that genius is an infinite capacity for taking pains. It's a very bad
+definition, but it does apply to detective work.
+You are doing so well now that it would be a pity for anyone to interfere.
+There is nothing like first hand evidence.
+There's no room for a mistake.
+Just let us hear it all in your own way as it occurred.
+Do you remember what Darwin says about music? He claims that the power of
+producing and appreciating it existed among the human race long before the power
+of speech was arrived at. Perhaps that is why we are so subtly influenced by it.
+There are vague memories in our souls of those misty centuries when the world
+was in its childhood.
+One's ideas must be as broad as Nature if they are to interpret Nature.
+I can understand. There is a mystery about this which stimulates the
+imagination; where there is no imagination there is no horror.
+The plot thickens.
+My fiddle would be the better for new strings.
+You do me too much honour.
+To a great mind, nothing is little.
+Smart--very smart!
 EOP

@@ -53,10 +53,12 @@ class MegaHAL
   # MegaHAL's brain first.
   #
   # @param [Symbol] name The personality to be loaded.
-  def become(name=:default)
+  # @param [ProgressBar] bar An optional progress bar instance.
+  def become(name=:default, bar = nil)
     raise ArgumentError, "no such personality" unless @@personalities.key?(name)
     clear
-    _train(@@personalities[name])
+    bar.total = @@personalities[name].length unless bar.nil?
+    _train(@@personalities[name], bar)
   end
 
   # Generate a reply to the user's input. If the learning attribute is set to true,

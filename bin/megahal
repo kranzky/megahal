@@ -58,35 +58,51 @@ def list_menu(megahal, log)
       return
     end
     menu.choice(:default) do
-      megahal.become(:default)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:default, bar)
+      bar.finish
       log.status('brain changed to the original loebner prize version')
     end
     menu.choice(:aliens) do
-      megahal.become(:aliens)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:aliens, bar)
+      bar.finish
       log.status('brain changed to bishop from aliens')
     end
     menu.choice(:ferris) do
-      megahal.become(:ferris)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:ferris, bar)
+      bar.finish
       log.status('brain changed to ferris bueller')
     end
     menu.choice(:pepys) do
-      megahal.become(:pepys)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:pepys, bar)
+      bar.finish
       log.status('brain changed to samuel pepys')
     end
     menu.choice(:pulp) do
-      megahal.become(:pulp)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:pulp, bar)
+      bar.finish
       log.status('brain changed to marsellus wallace from pulp fiction')
     end
     menu.choice(:sherlock) do
-      megahal.become(:sherlock)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:sherlock, bar)
+      bar.finish
       log.status('brain changed to sherlock holmes')
     end
     menu.choice(:startrek) do
-      megahal.become(:startrek)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:startrek, bar)
+      bar.finish
       log.status('brain changed to data from star trek')
     end
     menu.choice(:starwars) do
-      megahal.become(:starwars)
+      bar = ProgressBar.create(title: "Morphing", total: nil)
+      megahal.become(:starwars, bar)
+      bar.finish
       log.status('brain changed to threepio from star wars')
     end
   end
