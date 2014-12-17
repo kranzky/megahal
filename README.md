@@ -139,6 +139,43 @@ Example
 Here is an example conversation transcript:
 
 ```
+(brain changed to sherlock holmes)
+MH10: On the strange coincidences, the plannings, the cross-purposes, the wonderful chains of events, working through generations, and leading to the composition of a woman.
+USER: Who are you?
+MH10: You could never guess how I employed my morning, or what I ended by doing.
+USER: Did you play a game?
+MH10: Come, Watson, come! The game is afoot.
+USER: How exciting!
+MH10: Isn't it gorgeous! What do you think of it.
+USER: I think it's great. What are we going to do?
+MH10: I think, perhaps, it is simplicity itself.
+USER: Tell me then.
+MH10: Your statement is, I want you?
+USER: Ummm... no.
+MH10: Yes, certainly.
+USER: I think you're confused.
+MH10: I think that you have been too busy to think of it.
+USER: Are you saying what I think you're saying?
+MH10: You know how to look into it.
+USER: So do you by the sound of it.
+MH10: I have been of material assistance to me for fifty minutes.
+USER: Is this non-stop double entendre?
+MH10: More than that it is a great thing for me to be able to understand that I have ever listened.
+USER: Let's go and do something. Or get a bite to eat.
+MH10: That is interesting.
+USER: Why?
+MH10: Because there are fifty who can reason analytically.
+USER: Name them.
+MH10: My name is Sherlock Holmes.
+USER: And who are the other forty-nine?
+MH10: I want to ascertain.
+USER: You mean that you don't know?
+MH10: Light a cigar and let me see if I can do what you have told me I think that both inferences are permissible.
+USER: Well, it's been interesting. I must leave.
+MH10: No crime, but a very interesting statement.
+USER: Goodbye.
+MH10: You must get home instantly and act.
+MegaHAL Stopped
 ```
 
 Copyright
