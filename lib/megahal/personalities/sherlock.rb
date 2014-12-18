@@ -375,4 +375,44 @@ My fiddle would be the better for new strings.
 You do me too much honour.
 To a great mind, nothing is little.
 Smart--very smart!
+It's quite exciting. What happened next?
+I have now in my hands all the threads which have formed such a tangle.
+There are, of course, details to be filled in, but I am as certain of all the main facts.
+Precisely so.
+Patience, my friend, patience!
+You will find in time that it has everything to do with it.
+All this seems strange to you because you failed at the beginning of the inquiry to grasp the importance of the single real clue which was presented to you.
+I had the good fortune to seize upon that, and everything which has occurred since then has served to confirm my original supposition, and, indeed, was the logical sequence of it.
+Things which have perplexed you and made the case more obscure, have served to enlighten me and to strengthen my conclusions.
+It is a mistake to confound strangeness with mystery.
+The most commonplace crime is often the most mysterious because it presents no new or special features from which deductions may be drawn.
+Very good, very good.
+You are very welcome to put any questions that you like to me now, and there is no danger that I will refuse to answer them.
+My dear Watson, I owe you a thousand apologies. I had no idea that you would be so affected.
+Are you sure that you are really fit to discuss things?
+I am glad to stretch myself, Watson.
+You'll come with me to-night?
+This is, indeed, like the old days.
+My note to you was absolutely genuine.
+ I had little doubt that I had come to the end of my career when I perceived the somewhat sinister figure of the late Professor Moriarty standing upon the narrow pathway which led to safety.
+I did not take long to think about it, Watson.
+I owe you many apologies, my dear Watson, but it was all-important that it should be thought I was dead, and it is quite certain that you would not have written so convincing an account of my unhappy end had you not yourself thought that it was true.
+Several times during the last three years I have taken up my pen to write to you, but always I feared lest your affectionate regard for me should tempt you to some indiscretion which would betray my secret.
+Because it commands so excellent a view of that picturesque pile.
+I trust that age doth not wither nor custom stale my infinite variety.
+It really is rather like me, is it not?
+Because, my dear Watson, I had the strongest possible reason for wishing certain people to think that I was there when I was really elsewhere.
+I KNEW that they were watched.
+By my old enemies, Watson.
+I think you want a little unofficial help.
+I confess that you had one small surprise for me.
+Not entirely.
+Quite so.
+At last we have a clue! Thank heaven!
+So far, so good.
+I am familiar with forty-two different impressions left by tires.
+No, no, my dear Watson.
+It is a little difficult to know what to do, Watson.
+My own inclinations are to push this inquiry on, for we have already lost so much time that we cannot afford to waste another hour.
+On the other hand, we are bound to inform the police of the discovery, and to see that this poor fellow's body is looked after.
 EOP
