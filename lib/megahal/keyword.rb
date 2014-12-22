@@ -52,6 +52,7 @@ class MegaHAL
     ["HOLMES", "WATSON"],
     ["FRIEND", "ENEMY"],
     ["ALIVE", "DEAD"],
+    ["LIFE", "DEATH"],
     ["QUESTION", "ANSWER"],
     ["BLACK", "WHITE"],
     ["COLD", "HOT"],

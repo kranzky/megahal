@@ -305,7 +305,7 @@ class MegaHAL
         end
         # Select one of the contexts at random
         context = contexts.compact.shuffle.first
-        raise unless context
+        return nil unless context
         # Here we glue the generations of the @back and @fore models together
         glue = context.select { |symbol| symbol != 1 }
         _random_walk(@back, context.reverse, keyword_symbols).reverse + glue + _random_walk(@fore, context, keyword_symbols)
@@ -341,7 +341,7 @@ class MegaHAL
           break
         end
       end
-      raise if symbol == 0
+      return [] if symbol == 0
       break if symbol == 1
       results << symbol
       context << symbol
@@ -441,7 +441,6 @@ class MegaHAL
         failed = (@punc.count(context) == 0)
       end
       if failed
-        raise if i == 0
         retries += 1
         word_symbols.clear
         i = 0
