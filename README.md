@@ -11,7 +11,7 @@ MegaHAL is a learning chatterbot.
 You can run it as a command-line application, or embed it in your own
 application and make calls to it via a simple
 [API](http://www.rubydoc.info/gems/megahal/). For example, see
-thea[megahal-server](http://www.rubydoc.info/gems/megahal-server/) repository,
+the [megahal-server](http://github.com/jasonhutchens/megahal-server) repository,
 which allows you to [chat with MegaHAL online](http://megahal.kranzky.com/).
 
 It is built on top of [Sooth](https://github.com/jasonhutchens/sooth), a simple
