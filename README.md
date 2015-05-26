@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/megahal.svg)](http://badge.fury.io/rb/megahal)
 [![Dependency Status](https://gemnasium.com/jasonhutchens/megahal.png)](https://gemnasium.com/jasonhutchens/megahal)
-[![Build Status](https://semaphoreapp.com/api/v1/projects/6889bf33-e547-4200-a4fb-66b339a83d82/307128/shields_badge.svg)](https://semaphoreapp.com/jasonhutchens/megahal)
+[![Codeship Status for jasonhutchens/megahal](https://codeship.com/projects/8f43e890-e5b4-0132-1716-266c7b4e6c8b/status?branch=master)](https://codeship.com/projects/82076)
 
 MegaHAL
 =======
