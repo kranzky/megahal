@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Jason Hutchens"]
-  s.date = "2014-12-22"
+  s.date = "2015-05-26"
   s.description = "Have a weird conversation with a computer."
   s.email = "jasonhutchens@gmail.com"
   s.executables = ["megahal"]
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/jasonhutchens/megahal"
   s.licenses = ["UNLICENSE"]
   s.required_ruby_version = Gem::Requirement.new("~> 2.1")
-  s.rubygems_version = "2.4.4"
+  s.rubygems_version = "2.4.6"
   s.summary = "MegaHAL is a learning chatterbot."
 
   if s.respond_to? :specification_version then
