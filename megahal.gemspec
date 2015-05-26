@@ -16,9 +16,11 @@ Gem::Specification.new do |s|
   s.email = "jasonhutchens@gmail.com"
   s.executables = ["megahal"]
   s.extra_rdoc_files = [
+    "CHANGELOG.md",
     "README.md"
   ]
   s.files = [
+    "CHANGELOG.md",
     "Gemfile",
     "Gemfile.lock",
     "README.md",
