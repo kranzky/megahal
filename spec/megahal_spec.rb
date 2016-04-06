@@ -20,22 +20,24 @@ describe MegaHAL do
 
   describe "#clear" do
     it "clears all internal state" do
-      expect(megahal.instance_variables.length).to eq(7)
+      expect(megahal.instance_variables.length).to eq(8)
       megahal.clear
       megahal.reply("one two three four five")
       expect(megahal.instance_variable_get(:@dictionary).length).to eq(15)
-      expect(megahal.instance_variable_get(:@seed).count([1, 2])).to be > 0
-      expect(megahal.instance_variable_get(:@fore).count([1, 1])).to be > 0
-      expect(megahal.instance_variable_get(:@back).count([1, 1])).to be > 0
-      expect(megahal.instance_variable_get(:@case).count([1, 5])).to be > 0
-      expect(megahal.instance_variable_get(:@punc).count([1, 10])).to be > 0
+      expect(megahal.instance_variable_get(:@brain).length).to eq(33)
+      expect(megahal.instance_variable_get(:@seed).count(1)).to be > 0
+      expect(megahal.instance_variable_get(:@fore).count(0)).to be > 0
+      expect(megahal.instance_variable_get(:@back).count(0)).to be > 0
+      expect(megahal.instance_variable_get(:@case).count(13)).to be > 0
+      expect(megahal.instance_variable_get(:@punc).count(27)).to be > 0
       megahal.clear
       expect(megahal.instance_variable_get(:@dictionary).length).to eq(3)
-      expect(megahal.instance_variable_get(:@seed).count([0, 0])).to eq(0)
-      expect(megahal.instance_variable_get(:@fore).count([1, 1])).to eq(0)
-      expect(megahal.instance_variable_get(:@back).count([1, 1])).to eq(0)
-      expect(megahal.instance_variable_get(:@case).count([1, 5])).to eq(0)
-      expect(megahal.instance_variable_get(:@punc).count([1, 10])).to eq(0)
+      expect(megahal.instance_variable_get(:@brain).length).to eq(0)
+      expect(megahal.instance_variable_get(:@seed).count(1)).to eq(0)
+      expect(megahal.instance_variable_get(:@fore).count(0)).to eq(0)
+      expect(megahal.instance_variable_get(:@back).count(0)).to eq(0)
+      expect(megahal.instance_variable_get(:@case).count(13)).to eq(0)
+      expect(megahal.instance_variable_get(:@punc).count(27)).to eq(0)
     end
   end
 
