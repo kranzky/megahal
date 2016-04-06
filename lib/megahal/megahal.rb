@@ -31,6 +31,7 @@ class MegaHAL
     @case.clear    
     @punc.clear    
     @dictionary = { "<error>" => 0, "<fence>" => 1, "<blank>" => 2 }
+    @brain = {}
     nil
   end
 
@@ -112,11 +113,13 @@ class MegaHAL
     bar.total = 6 unless bar.nil?
     Zip::File.open(filename, Zip::File::CREATE) do |zipfile|
       zipfile.get_output_stream("dictionary") do |file|
-        file.write({
-          version: 'MH10',
+        data = {
+          version: 'MH11',
           learning: @learning,
+          brain: @brain,
           dictionary: @dictionary
-        }.to_json)
+        }
+        file.write(Marshal::dump(data))
       end
       bar.increment unless bar.nil?
       [:seed, :fore, :back, :case, :punc].each do |name|
@@ -135,10 +138,11 @@ class MegaHAL
   def load(filename, bar = nil)
     bar.total = 6 unless bar.nil?
     Zip::File.open(filename) do |zipfile|
-      data = JSON.parse(zipfile.find_entry("dictionary").get_input_stream.read)
-      raise "bad version" unless data['version'] == "MH10"
-      @learning = data['learning']
-      @dictionary = data['dictionary']
+      data = Marshal::load(zipfile.find_entry("dictionary").get_input_stream.read)
+      raise "bad version" unless data[:version] == "MH11"
+      @learning = data[:learning]
+      @brain = data[:brain]
+      @dictionary = data[:dictionary]
       bar.increment unless bar.nil?
       [:seed, :fore, :back, :case, :punc].each do |name|
         tmp = _get_tmp_filename(name)
@@ -195,9 +199,11 @@ class MegaHAL
     prev = 1
     (norm_symbols + [1]).each do |norm|
       context = [prev, 2]
-      @seed.observe(context, norm)  
+      id = @brain[context.dup] ||= @brain.length
+      @seed.observe(id, norm)  
       context = [2, norm]
-      @seed.observe(context, prev)  
+      id = @brain[context.dup] ||= @brain.length
+      @seed.observe(id, prev)  
       prev = norm
     end
 
@@ -207,11 +213,13 @@ class MegaHAL
     # special <fence> symbol (which has ID 1) is used to delimit the utterance.
     context = [1, 1]
     norm_symbols.each do |norm|
-      @fore.observe(context, norm)  
+      id = @brain[context.dup] ||= @brain.length
+      @fore.observe(id, norm)  
       context << norm
       context.shift
     end
-    @fore.observe(context, 1)
+    id = @brain[context.dup] ||= @brain.length
+    @fore.observe(id, 1)
 
     # The @back model is similar to the @fore model; it simply operates in the
     # opposite direction. This is how the original MegaHAL was able to generate
@@ -220,11 +228,13 @@ class MegaHAL
     # the gaps towards the beginning of the sentence.
     context = [1, 1]
     norm_symbols.reverse.each do |norm|
-      @back.observe(context, norm)  
+      id = @brain[context.dup] ||= @brain.length
+      @back.observe(id, norm)  
       context << norm
       context.shift
     end
-    @back.observe(context, 1)
+    id = @brain[context.dup] ||= @brain.length
+    @back.observe(id, 1)
 
     # The previous three models were all learning the sequence of norms, which
     # are capitalised words. When we generate a reply, we want to rewrite it so
@@ -233,7 +243,8 @@ class MegaHAL
     context = [1, 1]
     word_symbols.zip(norm_symbols).each do |word, norm|
       context[1] = norm
-      @case.observe(context, word)  
+      id = @brain[context.dup] ||= @brain.length
+      @case.observe(id, word)  
       context[0] = word
     end
 
@@ -245,7 +256,8 @@ class MegaHAL
     punc_symbols.zip(word_symbols + [1]).each do |punc, word|
       context << word
       context.shift
-      @punc.observe(context, punc)  
+      id = @brain[context.dup] ||= @brain.length
+      @punc.observe(id, punc)  
     end
   end
 
@@ -294,10 +306,12 @@ class MegaHAL
         # Use the @seed model to find two contexts that contain the keyword.
         contexts = [[2, keyword], [keyword, 2]]
         contexts.map! do |context|
-          count = @seed.count(context)
+          id = @brain[context.dup] ||= @brain.length
+          count = @seed.count(id)
           if count > 0
-            limit = @seed.count(context)
-            context[context.index(2)] = @seed.select(context, limit)
+            id = @brain[context.dup] ||= @brain.length
+            limit = @seed.count(id)
+            context[context.index(2)] = @seed.select(id, limit)
             context
           else
             nil
@@ -329,13 +343,15 @@ class MegaHAL
   def _random_walk(model, static_context, keyword_symbols)
     context = static_context.dup
     results = []
-    return [] if model.count(context) == 0
+    id = @brain[context.dup] ||= @brain.length
+    return [] if model.count(id) == 0
     local_keywords = keyword_symbols.dup
     loop do
       symbol = 0
       10.times do
-        limit = rand(model.count(context)) + 1
-        symbol = model.select(context, limit)
+        id = @brain[context.dup] ||= @brain.length
+        limit = rand(model.count(id)) + 1
+        symbol = model.select(id, limit)
         if local_keywords.include?(symbol)
           local_keywords.delete(symbol)
           break
@@ -373,7 +389,8 @@ class MegaHAL
     context = [1, 1]
     utterance.each do |norm|
       if keyword_symbols.include?(norm)
-        surprise = @fore.surprise(context, norm)
+        id = @brain[context.dup] ||= @brain.length
+        surprise = @fore.surprise(id, norm)
         score += surprise unless surprise.nil?
       end
       context << norm
@@ -383,7 +400,8 @@ class MegaHAL
     context = [1, 1]
     utterance.reverse.each do |norm|
       if keyword_symbols.include?(norm)
-        surprise = @back.surprise(context, norm)
+        id = @brain[context.dup] ||= @brain.length
+        surprise = @back.surprise(id, norm)
         score += surprise unless surprise.nil?
       end
       context << norm
@@ -429,16 +447,18 @@ class MegaHAL
       # what was observed previously.
       context[0] = (i == 0) ? 1 : word_symbols[i-1]
       context[1] = norm_symbols[i]
-      count = @case.count(context)
+      id = @brain[context.dup] ||= @brain.length
+      count = @case.count(id)
       unless failed = (count == 0)
         limit = rand(count) + 1
-        word_symbols << @case.select(context, limit)
+        word_symbols << @case.select(id, limit)
       end
       if (word_symbols.length == norm_symbols.length)
         # We need to check that the final word has been previously observed.
         context[0] = word_symbols.last
         context[1] = 1
-        failed = (@punc.count(context) == 0)
+        id = @brain[context.dup] ||= @brain.length
+        failed = (@punc.count(id) == 0)
       end
       if failed
         retries += 1
@@ -458,8 +478,9 @@ class MegaHAL
     (word_symbols + [1]).each do |word|
       context << word
       context.shift
-      limit = rand(@punc.count(context)) + 1
-      punc_symbols << @punc.select(context, limit)
+      id = @brain[context.dup] ||= @brain.length
+      limit = rand(@punc.count(id)) + 1
+      punc_symbols << @punc.select(id, limit)
     end
 
     # Finally we zip the word-separators and the words together, decode the
