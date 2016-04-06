@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.0.0](https://github.com/jasonhutchens/megahal/tree/v2.0.0) (2016-04-06)
+[Full Changelog](https://github.com/jasonhutchens/megahal/compare/v1.0.4...v2.0.0)
+
+**Closed issues:**
+
+- passing command-line arguments without interactive console [\#2](https://github.com/jasonhutchens/megahal/issues/2)
+
+**Merged pull requests:**
+
+- Update dependencies [\#3](https://github.com/jasonhutchens/megahal/pull/3) ([robbyoconnor](https://github.com/robbyoconnor))
+
 ## [v1.0.4](https://github.com/jasonhutchens/megahal/tree/v1.0.4) (2015-10-03)
 [Full Changelog](https://github.com/jasonhutchens/megahal/compare/v1.0.3...v1.0.4)
 
