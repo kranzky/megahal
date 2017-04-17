@@ -184,4 +184,4 @@ Have fun!
 Copyright
 ---------
 
-Copyright (c) 2016 Jason Hutchens. See UNLICENSE for further details.
+Copyright (c) 2017 Jason Hutchens. See UNLICENSE for further details.
