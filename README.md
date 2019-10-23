@@ -1,5 +1,4 @@
 [![Gem Version](https://badge.fury.io/rb/megahal.svg)](http://badge.fury.io/rb/megahal)
-[![Dependency Status](https://gemnasium.com/kranzky/megahal.png)](https://gemnasium.com/kranzky/megahal)
 [![Codeship Status for jasonhutchens/megahal](https://codeship.com/projects/8f43e890-e5b4-0132-1716-266c7b4e6c8b/status?branch=master)](https://codeship.com/projects/82076)
 
 MegaHAL
