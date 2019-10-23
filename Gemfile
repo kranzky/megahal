@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sooth', '~> 2.1'
+gem 'sooth', '~> 2.2'
 gem 'highline', '~> 2.0'
 gem 'ruby-progressbar', '~> 1.9'
 gem 'rubyzip', '~> 2.0'

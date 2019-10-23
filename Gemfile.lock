@@ -104,7 +104,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sooth (2.2.0)
+    sooth (2.2.1)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -126,7 +126,7 @@ DEPENDENCIES
   ruby-progressbar (~> 1.9)
   rubyzip (~> 2.0)
   simplecov (~> 0.10)
-  sooth (~> 2.1)
+  sooth (~> 2.2)
   yard (~> 0.8)
 
 BUNDLED WITH
