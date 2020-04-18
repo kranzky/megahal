@@ -6,6 +6,8 @@ MegaHAL
 
 MegaHAL is a learning chatterbot.
 
+![Sherlock Holmes](https://www.kranzky.com/img/portfolio/megahal.png)
+
 You can run it as a command-line application, or embed it in your own
 application and make calls to it via a simple
 [API](http://www.rubydoc.info/gems/megahal/). For example, see
