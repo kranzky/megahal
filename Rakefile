@@ -21,7 +21,7 @@ Juwelier::Tasks.new do |gem|
   gem.description = %Q{Have a weird conversation with a computer.}
   gem.email = "jasonhutchens@gmail.com"
   gem.authors = ["Jason Hutchens"]
-  gem.required_ruby_version = "~> 2.1"
+  gem.required_ruby_version = ">= 2.1"
   # dependencies defined in Gemfile
 end
 Juwelier::RubygemsDotOrgTasks.new
