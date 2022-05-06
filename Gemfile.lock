@@ -1,37 +1,39 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.2.3)
+    activesupport (6.1.5.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    async (1.30.1)
+    async (1.30.2)
       console (~> 1.10)
       nio4r (~> 2.3)
       timers (~> 4.1)
-    async-http (0.56.5)
+    async-http (0.56.6)
       async (>= 1.25)
       async-io (>= 1.28)
       async-pool (>= 0.2)
       protocol-http (~> 0.22.0)
       protocol-http1 (~> 0.14.0)
       protocol-http2 (~> 0.14.0)
+      traces (~> 0.4.0)
     async-http-faraday (0.11.0)
       async-http (~> 0.42)
       faraday
     async-io (1.33.0)
       async
-    async-pool (0.3.9)
+    async-pool (0.3.10)
       async (>= 1.25)
     builder (3.2.4)
     byebug (11.1.3)
     cld (0.11.0)
       ffi
     concurrent-ruby (1.1.10)
-    console (1.14.0)
+    console (1.15.0)
       fiber-local
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -64,7 +66,7 @@ GEM
     faraday-retry (1.0.3)
     ffi (1.15.5)
     fiber-local (1.0.0)
-    git (1.10.2)
+    git (1.11.0)
       rchardet (~> 1.8)
     github_api (0.19.0)
       addressable (~> 2.4)
@@ -105,7 +107,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nio4r (2.5.8)
-    nokogiri (1.13.3-arm64-darwin)
+    nokogiri (1.13.5-arm64-darwin)
       racc (~> 1.4)
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
@@ -117,15 +119,15 @@ GEM
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     protocol-hpack (1.4.2)
-    protocol-http (0.22.5)
-    protocol-http1 (0.14.2)
+    protocol-http (0.22.6)
+    protocol-http1 (0.14.4)
       protocol-http (~> 0.22)
     protocol-http2 (0.14.2)
       protocol-hpack (~> 1.4)
       protocol-http (~> 0.18)
     psych (4.0.3)
       stringio
-    public_suffix (4.0.6)
+    public_suffix (4.0.7)
     racc (1.6.0)
     rack (2.2.3)
     rainbow (3.1.1)
@@ -142,7 +144,7 @@ GEM
     rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.0)
+    rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
@@ -163,11 +165,13 @@ GEM
     stringio (3.0.1)
     thread_safe (0.3.6)
     timers (4.3.3)
+    traces (0.4.1)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     webrick (1.7.0)
     yard (0.9.27)
       webrick (~> 1.7.0)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   arm64-darwin-21
@@ -187,4 +191,4 @@ DEPENDENCIES
   yard (~> 0.9)
 
 BUNDLED WITH
-   2.2.32
+   2.3.4
